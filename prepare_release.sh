@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-PACKAGE_NAME="com.siristechnology.nepaltodayapp"
-APP_NAME="NepalToday"
+PACKAGE_NAME="com.siristechnology.bollywoodhungama"
+APP_NAME="Bollywood Hungama"
 TIME_STAMP=$(date +%s)
 BUILD_GRADLE=./android/app/build.gradle
 ANDROID_STRINGS_FILE=./android/app/src/main/res/values/strings.xml

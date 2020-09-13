@@ -1,48 +1,40 @@
 {
-  "project_info": {
-    "project_number": "145622808853",
-    "firebase_url": "https://nepaltoday-beta.firebaseio.com",
-    "project_id": "nepaltoday-beta",
-    "storage_bucket": "nepaltoday-beta.appspot.com"
-  },
-  "client": [
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:145622808853:android:6f0bd22d45789baee8911c",
-        "android_client_info": {
-          "package_name": "com.siristechnology.nepaltodayapp.beta"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "145622808853-smqsp74etonttno56t8ecku1957sfv0d.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.siristechnology.nepaltodayapp.beta",
-            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
-          }
-        },
-        {
-          "client_id": "145622808853-ickj1cqv80dt7geu8v9lusot5muoh0pm.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDE3gCm9sU4-b4TMAidSbUYI9ELrZeTIIU"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "145622808853-ickj1cqv80dt7geu8v9lusot5muoh0pm.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    }
-  ],
-  "configuration_version": "1"
+	"project_info": {
+		"project_number": "63258025120",
+		"firebase_url": "https://bhn-beta.firebaseio.com",
+		"project_id": "bhn-beta",
+		"storage_bucket": "bhn-beta.appspot.com"
+	},
+	"client": [
+		{
+			"client_info": {
+				"mobilesdk_app_id": "1:63258025120:android:3a2c743e42396faccefdc5",
+				"android_client_info": {
+					"package_name": "com.siristechnology.bollywoodhungama.beta"
+				}
+			},
+			"oauth_client": [
+				{
+					"client_id": "63258025120-71vqsv3inlb450mk65gsp0r354r2lonp.apps.googleusercontent.com",
+					"client_type": 3
+				}
+			],
+			"api_key": [
+				{
+					"current_key": "AIzaSyC1-mmdwERLWVRaV_UpSazCqC2z_m2-tfY"
+				}
+			],
+			"services": {
+				"appinvite_service": {
+					"other_platform_oauth_client": [
+						{
+							"client_id": "63258025120-71vqsv3inlb450mk65gsp0r354r2lonp.apps.googleusercontent.com",
+							"client_type": 3
+						}
+					]
+				}
+			}
+		}
+	],
+	"configuration_version": "1"
 }

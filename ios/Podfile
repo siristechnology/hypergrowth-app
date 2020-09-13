@@ -3,7 +3,7 @@
 platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-target 'nepaltodayapp' do
+target 'bollywoodhungama' do
   pod 'React', :path => '../node_modules/react-native/'
   pod 'React-Core', :path => '../node_modules/react-native/React'
   pod 'React-DevSupport', :path => '../node_modules/react-native/React'
@@ -31,7 +31,7 @@ target 'nepaltodayapp' do
 
 
 
-  target 'nepaltodayappTests' do
+  target 'bollywoodhungamaTests' do
     inherit! :search_paths
     # Pods for testing
   end

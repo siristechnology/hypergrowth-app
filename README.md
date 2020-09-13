@@ -1,13 +1,13 @@
-# NepalToday App
+# Bollywood Hungama App
 
-![Android Apk - Release & Google Play Publish](https://github.com/siristechnology/nepaltoday-app/workflows/Android%20Apk%20-%20Release%20&%20Google%20Play%20Publish/badge.svg)
+![Android Apk - Release & Google Play Publish](https://github.com/siristechnology/bhn-app/workflows/Android%20Apk%20-%20Release%20&%20Google%20Play%20Publish/badge.svg)
 [![DeepScan grade](https://deepscan.io/api/teams/5348/projects/7146/branches/66889/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=5348&pid=7146&bid=66889)
-[![Known Vulnerabilities](https://snyk.io/test/github/siristechnology/nepaltoday-app/badge.svg?targetFile=android/app/build.gradle)](https://snyk.io/test/github/siristechnology/nepaltoday-app?targetFile=android/app/build.gradle)
+[![Known Vulnerabilities](https://snyk.io/test/github/siristechnology/bhn-app/badge.svg?targetFile=android/app/build.gradle)](https://snyk.io/test/github/siristechnology/bhn-app?targetFile=android/app/build.gradle)
 
 <br/>
 <div>
 <img src="android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" alt="screenshot-1" height="80" style="margin-right:10px"/>
-<a href='https://play.google.com/store/apps/details?id=com.siristechnology.nepaltodayapp&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1' target='_blank' rel="noopener noreferrer"><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height="80"/></a>
+<a href='https://play.google.com/store/apps/details?id=com.siristechnology.bollywoodhungama&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1' target='_blank' rel="noopener noreferrer"><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height="80"/></a>
 </div>
   
 ## Latest screenshot
@@ -29,5 +29,5 @@
 
 -   Run `yarn refresh` to reload android app quickly without rebuilding
 -   Run `yarn reset` to reset package manager cache
--   Run `adb uninstall com.siristechnology.nepaltodayapp` to uninstall app from the android simulator
+-   Run `adb uninstall com.siristechnology.bollywoodhungama` to uninstall app from the android simulator
 -   Run `adb logcat` to view android emulator logs in terminal

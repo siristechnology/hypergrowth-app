@@ -1,4 +1,4 @@
-package com.siristechnology.nepaltodayapp.beta;
+package com.siristechnology.bollywoodhungama.beta;
 
 import com.facebook.react.ReactActivity;
 import android.os.Bundle;
@@ -20,6 +20,6 @@ public class MainActivity extends ReactActivity {
 
   @Override
   protected String getMainComponentName() {
-    return "nepaltodayapp";
+    return "bollywoodhungama";
   }
 }
