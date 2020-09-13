@@ -5,15 +5,11 @@ import { createBottomTabNavigator } from 'react-navigation-tabs'
 
 import HomeScreen from '../home-screen/home.screen'
 import TwitterScreen from '../twitter-screen/twitter.screen'
-import HeadlineScreen from '../headline-screen/headline.screen'
-import CoronaScreen from '../corona-screen/corona.screen'
 import TrendingScreen from './../trending-screen/trending.screen'
 
 export const BottomTabScreen = createBottomTabNavigator(
 	{
 		Home: HomeScreen,
-		Headline: HeadlineScreen,
-		Corona: CoronaScreen,
 		Trending: TrendingScreen,
 		Twitter: TwitterScreen,
 	},
@@ -25,12 +21,8 @@ export const BottomTabScreen = createBottomTabNavigator(
 				let iconName
 				if (routeName === 'Home') {
 					iconName = 'home'
-				} else if (routeName === 'Headline') {
-					iconName = 'newspaper'
 				} else if (routeName === 'Twitter') {
 					iconName = 'twitter'
-				} else if (routeName === 'Corona') {
-					iconName = 'skull'
 				} else if (routeName === 'Trending') {
 					iconName = 'fire'
 				}

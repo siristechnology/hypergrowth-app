@@ -20,7 +20,6 @@ const App = () => {
 	const [clicked, setClicked] = useState(false)
 	const [loading, setLoading] = useState(false)
 	const [article, setArticle] = useState({})
-	const [coronaNotif, setCoronaNotif] = useState(false)
 
 	const onRegister = (token) => {
 		signInAnonymously().then(() => notificationHandler.register(auth().currentUser, token.token))
@@ -37,13 +36,10 @@ const App = () => {
 					setLoading(false)
 				})
 				.catch((err) => setLoading(false))
-		} else if (notif.notifType === 'corona' && notif.foreground === false) {
-			setClicked(true)
-			setCoronaNotif(true)
 		}
 	}
 
-	const loadAppContainer = (article, clicked, coronaNotif) => {
+	const loadAppContainer = (article, clicked) => {
 		if (clicked && article._id) {
 			return (
 				<AppContainer
@@ -52,8 +48,6 @@ const App = () => {
 					}
 				/>
 			)
-		} else if (clicked && coronaNotif) {
-			return <AppContainer ref={(navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef, 'Corona', { type: 'Corona' })} />
 		} else {
 			return <AppContainer ref={(navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef)} />
 		}
@@ -77,7 +71,7 @@ const App = () => {
 							<CircularSpinner />
 						</AppLayout>
 					)) ||
-						loadAppContainer(article, clicked, coronaNotif)}
+						loadAppContainer(article, clicked)}
 				</ErrorBoundary>
 			</Provider>
 		</ApplicationProvider>
