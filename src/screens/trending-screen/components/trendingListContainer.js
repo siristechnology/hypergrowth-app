@@ -20,9 +20,6 @@ const TrendingListContainer = (props) => {
 	const renderCategory = (info) => {
 		return (
 			<View style={styles.catCard}>
-				<View style={styles.textView}>
-					<Text style={styles.textStyle}>{info.item.category}</Text>
-				</View>
 				{info.item.counts.map((iItem, i) => (
 					<View key={i}>
 						<TrendingCard onCardClick={onCardClick} trending={iItem} />
