@@ -3,7 +3,6 @@ import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import { StyleSheet, View, Text } from 'react-native'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import { convertToNepaliDigit } from '../../../helper/utils'
 
 export const FETCH_WEATHER_INFO_QUERY = gql`
 	query getWeatherInfo {
@@ -32,7 +31,7 @@ const Weather = () => {
 		return (
 			<View style={styles.weatherContainerStyle}>
 				<FontAwesome name="cloud" size={20} />
-				<Text style={styles.weatherTextStyle}>{convertToNepaliDigit(temperature)} ˚C</Text>
+				<Text style={styles.weatherTextStyle}>{temperature} ˚C</Text>
 			</View>
 		)
 	} else {

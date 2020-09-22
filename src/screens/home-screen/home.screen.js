@@ -13,7 +13,7 @@ import { fetchfromAsync, storetoAsync } from '../../helper/cacheStorage'
 import { CircularSpinner } from '../../components/common'
 
 const Home = ({ navigation }) => {
-	const [nepaliDate, setNepaliDate] = useState('')
+	const [englishDate, setEnglishDate] = useState('')
 	const [refreshing, setRefreshing] = useState(false)
 	const [localArticles, setLocalArticles] = useState({ getArticles: [] })
 
@@ -40,7 +40,7 @@ const Home = ({ navigation }) => {
 	}
 
 	useEffect(() => {
-		setNepaliDate(getFormattedCurrentEnglishDate())
+		setEnglishDate(getFormattedCurrentEnglishDate())
 		crashlytics().log('Home page test log.')
 		fetchArticlesFromAsyncStorage()
 		customTrace()
@@ -66,7 +66,7 @@ const Home = ({ navigation }) => {
 		return (
 			<AppLayout>
 				<View style={style.headerStyle}>
-					<Text style={style.textStyle}>{nepaliDate}</Text>
+					<Text style={style.textStyle}>{englishDate}</Text>
 					<Weather />
 				</View>
 				<ArticleListContainer
@@ -117,7 +117,7 @@ const style = StyleSheet.create({
 	},
 	textStyle: {
 		fontWeight: 'bold',
-		fontSize: 26,
+		fontSize: 24,
 		paddingTop: 5,
 	},
 	timeTextStyle: {
