@@ -4,13 +4,13 @@ import { addLeadingZero } from './utils'
 
 moment.updateLocale('en', {
 	relativeTime: {
-		past: '%s अघि',
-		m: '1 मिनेट',
-		mm: '%d मिनेट',
-		h: '1 घण्टा',
-		hh: '%d घण्टा',
-		d: '1 दिन',
-		dd: '%d दिन',
+		past: '%s ago',
+		m: '1 minute',
+		mm: '%d minute',
+		h: '1 hour',
+		hh: '%d hour',
+		d: '1 ago',
+		dd: '%d ago',
 	},
 })
 export const getRelativeTime = (date) => {

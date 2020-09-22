@@ -1,6 +1,9 @@
 function getNepaliMonthsInNepali() {
 	return ['बैशाख', 'जेठ', 'अषाढ', 'श्रावण', 'भाद्र', 'आश्विन', 'कार्तिक', 'मङ्सिर', 'पौष', 'माघ', 'फाल्गुन', 'चैत्र']
 }
+function getEnglishMonths(){
+	return ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+}
 function getNepaliMonth(t) {
 	t = parseInt(t, 10)
 	var e = getNepaliMonthsInNepali()
@@ -246,4 +249,5 @@ module.exports = {
 	getNepaliMonthsInNepali,
 	convertNos,
 	getCurrentDayName,
+	getEnglishMonths
 }

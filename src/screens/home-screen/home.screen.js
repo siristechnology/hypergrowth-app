@@ -4,7 +4,7 @@ import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import AppLayout from '../../frame/app-layout'
 import { ArticleListContainer } from '../../layout/article'
-import { getFormattedCurrentNepaliDate } from '../../helper/dateFormatter'
+import { getFormattedCurrentEnglishDate } from '../../helper/dateFormatter'
 import Weather from './components/weather.component'
 import crashlytics from '@react-native-firebase/crashlytics'
 import perf from '@react-native-firebase/perf'
@@ -40,7 +40,7 @@ const Home = ({ navigation }) => {
 	}
 
 	useEffect(() => {
-		setNepaliDate(getFormattedCurrentNepaliDate())
+		setNepaliDate(getFormattedCurrentEnglishDate())
 		crashlytics().log('Home page test log.')
 		fetchArticlesFromAsyncStorage()
 		customTrace()

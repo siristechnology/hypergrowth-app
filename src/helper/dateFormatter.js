@@ -1,4 +1,4 @@
-import { AD2BS, getNepaliMonthsInNepali, convertNos, getCurrentDayName } from './dateConverter'
+import { AD2BS, getNepaliMonthsInNepali, convertNos, getCurrentDayName, getEnglishMonths } from './dateConverter'
 
 const getCurrentDayNameInNepali = () => {
 	const currentDayName = getCurrentDayName().toLowerCase()
@@ -40,4 +40,12 @@ const getFormattedCurrentNepaliDate = () => {
 	)}${convertNos(nepaliDateString.slice(9, 10))}`
 }
 
-export { getCurrentDayNameInNepali, getFormattedCurrentNepaliDate }
+const getFormattedCurrentEnglishDate = () => {
+	const currentDate = new Date()
+	const dayName = getCurrentDayName()
+	const monthName = getEnglishMonths()[currentDate.getMonth()]
+	const date = currentDate.getDate()
+	return `${dayName}, ${monthName} ${date}` 
+}
+
+export { getCurrentDayNameInNepali, getFormattedCurrentNepaliDate, getFormattedCurrentEnglishDate }

@@ -11,5 +11,11 @@ export const en = {
 		TECHNOLOGY: 'technology',
 		AGRICULTURE: 'agriculture',
 		SHARE: 'share'
+	},
+	public: {
+		APP_NAME: 'Nepal Today',
+		READ_MORE: 'Read More',
+		BACK: 'Back',
+		REFRESH: 'Refresh',
 	}
 }

@@ -4,7 +4,7 @@ import { ThemedComponentProps, ThemeType, withStyles } from 'react-native-ui-kit
 import { Avatar, Text, Button } from 'react-native-ui-kitten/ui'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
-import { np } from '../../../lang/np'
+import { en } from '../../../lang/en'
 import { getRelativeTime } from '../../../helper/time'
 import { ClockIconOutline } from '../../../assets/icons'
 import { ArticleActivityBar } from '../../../components/articles'
@@ -20,7 +20,7 @@ export type ArticleDetailComponentProps = ThemedComponentProps & ComponentProps
 class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentProps> {
 	public render(): React.ReactNode {
 		const { themedStyle, article } = this.props
-		const { READ_MORE } = np.public
+		const { READ_MORE } = en.public
 		const BackIcon = (
 			<AntDesign
 				name="back"

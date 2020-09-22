@@ -39,10 +39,12 @@ const ArticleListItemComponent = React.memo((props) => {
 export const ArticleListItem = withStyles(ArticleListItemComponent, (theme) => ({
 	container: {
 		borderRadius: 12,
+		elevation: 1
 	},
 	infoContainer: {
 		paddingHorizontal: 16,
-		paddingVertical: 8,
+		paddingVertical: 0,
+		paddingBottom: 8,
 		borderBottomWidth: 1,
 		borderBottomColor: theme['border-basic-color-2'],
 	},
