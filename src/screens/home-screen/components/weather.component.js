@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
 	},
 	weatherTextStyle: {
 		fontWeight: 'bold',
-		fontSize: 18,
+		fontSize: 16,
 		marginLeft: 3,
 	},
 })

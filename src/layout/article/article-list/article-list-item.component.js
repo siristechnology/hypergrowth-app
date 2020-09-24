@@ -61,9 +61,9 @@ export const ArticleListItem = withStyles(ArticleListItemComponent, (theme) => (
 		borderWidth: 1,
 		borderColor: '#f5f7fa',
 	},
-	titleLabel: textStyle.headline,
+	titleLabel: {fontSize: 20},
 	descriptionLabel: {
 		marginTop: 2,
-		...textStyle.subtitle,
+		fontSize: 15,
 	},
 }))

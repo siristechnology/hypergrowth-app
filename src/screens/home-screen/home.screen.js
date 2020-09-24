@@ -117,7 +117,7 @@ const style = StyleSheet.create({
 	},
 	textStyle: {
 		fontWeight: 'bold',
-		fontSize: 24,
+		fontSize: 21,
 		paddingTop: 5,
 	},
 	timeTextStyle: {
