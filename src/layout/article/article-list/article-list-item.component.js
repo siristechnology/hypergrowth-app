@@ -1,11 +1,11 @@
 import React from 'react'
 import { Text } from 'react-native-ui-kitten/ui'
 import { withStyles } from 'react-native-ui-kitten/theme'
-import { ImageBackground, View } from 'react-native'
+import { Image, View } from 'react-native'
 
 import { getRelativeTime } from '../../../helper/time'
 import { ArticleActivityBar } from '../../../components/articles'
-import { ActivityAuthoring, textStyle } from '../../../components/common'
+import { ActivityAuthoring } from '../../../components/common'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const ArticleListItemComponent = React.memo((props) => {
@@ -16,7 +16,7 @@ const ArticleListItemComponent = React.memo((props) => {
 
 	return (
 		<TouchableOpacity activeOpacity={0.95} {...restProps} style={[themedStyle.container, style]} onPress={onPress}>
-			<ImageBackground style={themedStyle.imageContainer} imageStyle={themedStyle.image} source={{ uri: article.imageLink }} />
+			<Image style={themedStyle.imageContainer} source={{ uri: article.imageLink }} />
 			<ArticleActivityBar style={themedStyle.activityContainer}>
 				<ActivityAuthoring
 					photo={{ uri: article.source.logoLink }}
@@ -54,12 +54,11 @@ export const ArticleListItem = withStyles(ArticleListItemComponent, (theme) => (
 	},
 	imageContainer: {
 		height: 220,
-	},
-	image: {
 		borderTopLeftRadius: 12,
 		borderTopRightRadius: 12,
 		borderWidth: 1,
 		borderColor: '#f5f7fa',
+		resizeMode: 'contain'
 	},
 	titleLabel: {fontSize: 20},
 	descriptionLabel: {
