@@ -9,8 +9,8 @@ moment.updateLocale('en', {
 		mm: '%d minute',
 		h: '1 hour',
 		hh: '%d hour',
-		d: '1 ago',
-		dd: '%d ago',
+		d: '1 day',
+		dd: '%d day',
 	},
 })
 export const getRelativeTime = (date) => {
