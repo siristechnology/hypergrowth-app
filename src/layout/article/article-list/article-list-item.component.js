@@ -16,7 +16,9 @@ const ArticleListItemComponent = React.memo((props) => {
 
 	return (
 		<TouchableOpacity activeOpacity={0.95} {...restProps} style={[themedStyle.container, style]} onPress={onPress}>
-			<Image style={themedStyle.imageContainer} source={{ uri: article.imageLink }} />
+			<View style={themedStyle.imageContainer}>
+				<Image style={themedStyle.image} source={{ uri: article.imageLink }} />
+			</View>
 			<ArticleActivityBar style={themedStyle.activityContainer}>
 				<ActivityAuthoring
 					photo={{ uri: article.source.logoLink }}
@@ -39,7 +41,7 @@ const ArticleListItemComponent = React.memo((props) => {
 export const ArticleListItem = withStyles(ArticleListItemComponent, (theme) => ({
 	container: {
 		borderRadius: 12,
-		elevation: 1
+		elevation: 1,
 	},
 	infoContainer: {
 		paddingHorizontal: 16,
@@ -56,11 +58,12 @@ export const ArticleListItem = withStyles(ArticleListItemComponent, (theme) => (
 		height: 220,
 		borderTopLeftRadius: 12,
 		borderTopRightRadius: 12,
-		borderWidth: 1,
-		borderColor: '#f5f7fa',
-		resizeMode: 'contain'
 	},
-	titleLabel: {fontSize: 20},
+	image: {
+		height: '100%',
+		resizeMode: 'contain',
+	},
+	titleLabel: { fontSize: 20 },
 	descriptionLabel: {
 		marginTop: 2,
 		fontSize: 15,
