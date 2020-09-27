@@ -47,8 +47,6 @@ export const ArticleListItem = withStyles(ArticleListItemComponent, (theme) => (
 		paddingHorizontal: 16,
 		paddingVertical: 0,
 		paddingBottom: 8,
-		borderBottomWidth: 1,
-		borderBottomColor: theme['border-basic-color-2'],
 	},
 	activityContainer: {
 		paddingHorizontal: 16,
