@@ -1,24 +1,22 @@
 import React from 'react'
 import { Text } from 'react-native-ui-kitten/ui'
 import { withStyles } from 'react-native-ui-kitten/theme'
-import { Image, View } from 'react-native'
+import { ImageBackground, View } from 'react-native'
 
 import { getRelativeTime } from '../../../helper/time'
 import { ArticleActivityBar } from '../../../components/articles'
-import { ActivityAuthoring } from '../../../components/common'
+import { ActivityAuthoring, textStyle } from '../../../components/common'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
-const ArticleListItemComponent = React.memo((props) => {
+const HeadlineItemComponent = React.memo((props) => {
 	const { style, themedStyle, article, ...restProps } = props
 	const onPress = () => {
 		props.onPress(article)
 	}
 
 	return (
-		<TouchableOpacity activeOpacity={0.95} {...restProps} style={[themedStyle.container, style]} onPress={onPress}>
-			<View style={themedStyle.imageContainer}>
-				<Image style={themedStyle.image} source={{ uri: article.imageLink }} />
-			</View>
+		<TouchableOpacity activeOpacity={0.8} {...restProps} style={[themedStyle.container, style]} onPress={onPress}>
+			<ImageBackground style={themedStyle.imageContainer} imageStyle={themedStyle.image} source={{ uri: article.imageLink }} />
 			<ArticleActivityBar style={themedStyle.activityContainer}>
 				<ActivityAuthoring
 					photo={{ uri: article.source.logoLink }}
@@ -38,15 +36,14 @@ const ArticleListItemComponent = React.memo((props) => {
 	)
 })
 
-export const ArticleListItem = withStyles(ArticleListItemComponent, (theme) => ({
+export const HeadlineComponent = withStyles(HeadlineItemComponent, (theme) => ({
 	container: {
-		borderRadius: 12,
-		elevation: 1,
+		borderRadius: 8,
 	},
 	infoContainer: {
 		paddingHorizontal: 16,
-		paddingVertical: 0,
-		paddingBottom: 8,
+		paddingVertical: 8,
+		marginTop: -12,
 	},
 	activityContainer: {
 		paddingHorizontal: 16,
@@ -54,16 +51,14 @@ export const ArticleListItem = withStyles(ArticleListItemComponent, (theme) => (
 	},
 	imageContainer: {
 		height: 220,
-		borderTopLeftRadius: 12,
-		borderTopRightRadius: 12,
 	},
 	image: {
-		height: '100%',
-		resizeMode: 'contain',
+		borderTopLeftRadius: 8,
+		borderTopRightRadius: 8,
 	},
-	titleLabel: { fontSize: 20 },
+	titleLabel: textStyle.headline,
 	descriptionLabel: {
 		marginTop: 2,
-		fontSize: 15,
+		...textStyle.subtitle,
 	},
 }))

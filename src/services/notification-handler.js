@@ -18,7 +18,7 @@ class NotificationHandler {
 					})
 					.catch((err) => reject(err))
 			} else {
-				reject({ message: 'Not found' })
+				reject(new Error('FCMToken Not found'))
 			}
 		})
 	}
@@ -37,7 +37,7 @@ class NotificationHandler {
 					},
 				},
 			})
-			.catch((reason) => console.log(reason))
+			.catch((reason) => crashlytics().recordError(reason))
 	}
 
 	fetchArticle(id) {
@@ -51,7 +51,6 @@ class NotificationHandler {
 					resolve(res)
 				})
 				.catch((error) => {
-					console.log('printing error', error)
 					crashlytics().recordError(error)
 					reject(error)
 				})

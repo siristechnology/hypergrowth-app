@@ -34,7 +34,7 @@ const Home = ({ navigation }) => {
 				setLocalArticles({ getArticles: res })
 			})
 			.catch((err) => {
-				console.log(err)
+				crashlytics().recordError(err)
 				setLocalArticles([])
 			})
 	}
@@ -43,7 +43,6 @@ const Home = ({ navigation }) => {
 		setEnglishDate(getFormattedCurrentEnglishDate())
 		crashlytics().log('Home page test log.')
 		fetchArticlesFromAsyncStorage()
-		customTrace()
 	}, [])
 
 	const { loading, data, refetch, error } = useQuery(GET_ARTICLES_QUERY, {
@@ -56,12 +55,10 @@ const Home = ({ navigation }) => {
 	}
 
 	if (error) {
-		console.log('printing error', error)
 		crashlytics().recordError(new Error(error))
 	}
 
 	const dataArticles = (data && data.getArticles && data.getArticles) || []
-
 	if (dataArticles.length || localArticles.getArticles.length) {
 		return (
 			<AppLayout>
@@ -71,7 +68,7 @@ const Home = ({ navigation }) => {
 				</View>
 				<ArticleListContainer
 					navigation={navigation}
-					articles={(data && data.getArticles && data.getArticles.length && data) || localArticles}
+					articles={dataArticles}
 					refreshing={refreshing}
 					handleRefresh={handleRefresh}
 				/>

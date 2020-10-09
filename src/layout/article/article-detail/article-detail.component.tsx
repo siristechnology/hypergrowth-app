@@ -4,11 +4,12 @@ import { ThemedComponentProps, ThemeType, withStyles } from 'react-native-ui-kit
 import { Avatar, Text, Button } from 'react-native-ui-kitten/ui'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
-import { en } from '../../../lang/en'
+import { np } from '../../../lang/np'
 import { getRelativeTime } from '../../../helper/time'
 import { ClockIconOutline } from '../../../assets/icons'
 import { ArticleActivityBar } from '../../../components/articles'
 import { ContainerView, textStyle } from '../../../components/common'
+const NEPALTODAY_URL = 'https://tinyurl.com/NepalTodayApp'
 
 interface ComponentProps {
 	article
@@ -20,7 +21,7 @@ export type ArticleDetailComponentProps = ThemedComponentProps & ComponentProps
 class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentProps> {
 	public render(): React.ReactNode {
 		const { themedStyle, article } = this.props
-		const { READ_MORE } = en.public
+		const { READ_MORE } = np.public
 		const BackIcon = (
 			<AntDesign
 				name="back"
@@ -51,11 +52,11 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 					{shareButton}
 				</View>
 				<ContainerView style={themedStyle.container}>
-					<ImageBackground style={themedStyle.image} source={{ uri: article.imageLink }}>
+					<ImageBackground style={[themedStyle.image,{height: article.category=='cartoon' && 350 || 175}]} source={{ uri: article.imageLink }} imageStyle={{resizeMode:article.category=='cartoon' && 'stretch' || 'cover'}}>
 						<Avatar style={themedStyle.authorPhoto} size="large" source={{ uri: article.source.logoLink }} />
 					</ImageBackground>
 
-					<View style={themedStyle.detailsContainer}>
+					{article.category!='cartoon' && <View style={themedStyle.detailsContainer}>
 						<Text style={themedStyle.titleLabel} category="h5">
 							{article.title}
 						</Text>
@@ -70,12 +71,30 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 						<Text category="s1" style={themedStyle.contentLabel}>
 							{article.content}
 						</Text>
+						{article.tags && article.tags.length > 0 && (
+							<View style={themedStyle.tagsView}>
+								{article.tags.map((tag, i) => (
+									<Text key={i} style={themedStyle.tags}>
+										#{tag}{' '}
+									</Text>
+								))}
+							</View>
+						)}
 						<View style={themedStyle.readMoreBtnWrapper}>
 							<Button onPress={this.handleLinkClick} style={themedStyle.readMoreBtn}>
 								{READ_MORE}
 							</Button>
 						</View>
-					</View>
+					</View> || <View style={themedStyle.detailsContainer}>
+						<ArticleActivityBar>
+							<View style={[themedStyle.dateContainer,{marginTop: 30}]}>
+								{ClockIconOutline(themedStyle.dateIcon)}
+								<Text style={themedStyle.dateLabel} appearance="hint" category="p2">
+									{getRelativeTime(article.createdDate)}
+								</Text>
+							</View>
+						</ArticleActivityBar>
+					</View>}
 				</ContainerView>
 			</View>
 		)
@@ -88,7 +107,7 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 	private shareButtonClick = () => {
 		const { title, link } = this.props.article
 		Share.share({
-			message: title + '  ' + link,
+			message: title + '  ' + link + ' #NEPALTODAYAPP ' + NEPALTODAY_URL,
 			url: link,
 			title: title,
 		})
@@ -120,7 +139,7 @@ export const ArticleDetail = withStyles(ArticleDetailComponent, (theme: ThemeTyp
 	image: {
 		minHeight: 175,
 		borderWidth: 1,
-		borderColor: '#f5f7fa',
+		borderColor: '#f5f7fa'
 	},
 	authorPhoto: {
 		position: 'absolute',
@@ -141,6 +160,12 @@ export const ArticleDetail = withStyles(ArticleDetailComponent, (theme: ThemeTyp
 		marginVertical: 12,
 		...textStyle.paragraph,
 		fontSize: 18,
+	},
+	tags: {
+		marginVertical: 7,
+		fontSize: 16,
+		fontWeight: 'bold',
+		marginRight: 2,
 	},
 	dateIcon: {
 		width: 13,
@@ -166,5 +191,10 @@ export const ArticleDetail = withStyles(ArticleDetailComponent, (theme: ThemeTyp
 	},
 	readMoreBtn: {
 		width: 200,
+	},
+	tagsView: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		marginVertical: 7,
 	},
 }))
