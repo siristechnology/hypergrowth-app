@@ -34,21 +34,18 @@ const App = () => {
 					setClicked(true)
 					setLoading(false)
 				})
-				.catch((err) => setLoading(false))
+				.catch((err) => {
+					crashlytics().recordError(err)
+					setLoading(false)
+				})
 		}
 	}
 
-	const loadAppContainer = (article, clicked) => {
-		if (clicked && article._id) {
-			return (
-				<AppContainer
-					ref={(navigatorRef) =>
-						NavigationService.setTopLevelNavigator(navigatorRef, 'ArticleDetail', { article: article, articles: [article] })
-					}
-				/>
-			)
+	const loadAppContainer = (articleToShow, notificationClicked) => {
+		if (notificationClicked && articleToShow._id) {
+			return <AppContainer initialScreenName="ArticleDetail" initialParams={{ article: articleToShow }} />
 		} else {
-			return <AppContainer ref={(navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef)} />
+			return <AppContainer />
 		}
 	}
 
