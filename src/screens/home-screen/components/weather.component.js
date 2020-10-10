@@ -29,7 +29,7 @@ const Weather = () => {
 		temperature = Math.ceil(temperature)
 
 		return (
-			<View style={styles.weatherContainerStyle}>
+			<View testID="weatherComponent" style={styles.weatherContainerStyle}>
 				<FontAwesome name="cloud" size={20} />
 				<Text style={styles.weatherTextStyle}>{temperature} ˚C</Text>
 			</View>
