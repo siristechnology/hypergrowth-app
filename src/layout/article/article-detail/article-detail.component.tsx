@@ -4,7 +4,6 @@ import { ThemedComponentProps, ThemeType, withStyles } from 'react-native-ui-kit
 import { Avatar, Text, Button } from 'react-native-ui-kitten/ui'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
-import { np } from '../../../lang/np'
 import { getRelativeTime } from '../../../helper/time'
 import { ClockIconOutline } from '../../../assets/icons'
 import { ArticleActivityBar } from '../../../components/articles'
@@ -21,7 +20,6 @@ export type ArticleDetailComponentProps = ThemedComponentProps & ComponentProps
 class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentProps> {
 	public render(): React.ReactNode {
 		const { themedStyle, article } = this.props
-		const { READ_MORE } = np.public
 		const BackIcon = (
 			<AntDesign
 				name="back"
@@ -54,7 +52,7 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 				<ContainerView style={themedStyle.container}>
 					<ImageBackground
 						style={[themedStyle.image, { height: (article.category == 'cartoon' && 350) || 175 }]}
-						source={{ uri: article.imageLink }}
+						source={{ uri: article.imageLink.includes("data:image") && article.source.logoLink || article.imageLink }}
 						imageStyle={{ resizeMode: (article.category == 'cartoon' && 'stretch') || 'cover' }}
 					>
 						<Avatar style={themedStyle.authorPhoto} size="large" source={{ uri: article.source.logoLink }} />
@@ -87,7 +85,7 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 							)}
 							<View style={themedStyle.readMoreBtnWrapper}>
 								<Button onPress={this.handleLinkClick} style={themedStyle.readMoreBtn}>
-									{READ_MORE}
+									READ MORE
 								</Button>
 							</View>
 						</View>

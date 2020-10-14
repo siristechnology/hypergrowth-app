@@ -16,7 +16,7 @@ const HeadlineItemComponent = React.memo((props) => {
 
 	return (
 		<TouchableOpacity activeOpacity={0.8} {...restProps} style={[themedStyle.container, style]} onPress={onPress}>
-			<ImageBackground style={themedStyle.imageContainer} imageStyle={themedStyle.image} source={{ uri: article.imageLink }} />
+			<ImageBackground style={themedStyle.imageContainer} imageStyle={themedStyle.image} source={{ uri: article.imageLink.includes("data:image") && article.source.logoLink || article.imageLink }} />
 			<ArticleActivityBar style={themedStyle.activityContainer}>
 				<ActivityAuthoring
 					photo={{ uri: article.source.logoLink }}

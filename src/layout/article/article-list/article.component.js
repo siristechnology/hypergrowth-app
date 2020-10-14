@@ -20,7 +20,7 @@ const ArticleListItemCompoent = (props) => {
 			<View style={[themedStyle.container]}>
 				<View style={themedStyle.articleWrapper}>
 					<View style={themedStyle.leftWrapper}>
-						<ImageBackground style={themedStyle.imageContainer} imageStyle={themedStyle.image} source={{ uri: article.imageLink }} />
+						<ImageBackground style={themedStyle.imageContainer} imageStyle={themedStyle.image} source={{ uri: article.imageLink.includes("data:image") && article.source.logoLink || article.imageLink }} />
 					</View>
 					<View style={themedStyle.rightWrapper}>
 						<View style={themedStyle.headerWrapper}>

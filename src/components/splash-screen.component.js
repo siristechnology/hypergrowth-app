@@ -2,12 +2,12 @@ import React from 'react'
 import { Button } from 'react-native-ui-kitten'
 import { StyleSheet, Text, View } from 'react-native'
 
-import { np } from '../lang/np'
+import { en } from '../lang/en'
 
 const SplashScreenComponent = ({ onRefresh = (f) => f }) => {
 	const {
 		public: { REFRESH, APP_NAME },
-	} = np
+	} = en
 	const viewStyles = [styles.container, { backgroundColor: 'skyblue' }]
 	return (
 		<View style={viewStyles}>
