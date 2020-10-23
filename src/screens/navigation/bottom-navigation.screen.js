@@ -1,18 +1,18 @@
 import React from 'react'
 import FontAwesome from 'react-native-vector-icons/FontAwesome5'
 import SimpleLine from 'react-native-vector-icons/SimpleLineIcons'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 
 import HomeScreen from '../home-screen/home.screen'
 import TwitterScreen from '../twitter-screen/twitter.screen'
 import TrendingScreen from './../trending-screen/trending.screen'
 
-const Tab = createBottomTabNavigator()
+const Tab = createMaterialBottomTabNavigator()
 
-export const BottomTabScreen = ({ route }) => {
+export const BottomTabScreen = () => {
 	return (
 		<Tab.Navigator
-			initialRouteName={route.params.initialScreenName}
+			initialRouteName="Home"
 			tabBarOptions={{
 				activeTintColor: '#ff0000',
 				inactiveTintColor: 'gray',
