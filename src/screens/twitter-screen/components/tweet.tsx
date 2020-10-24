@@ -61,7 +61,7 @@ const TwitterListItemComponent = (props) => {
 
 export const TweetComponent = withStyles(TwitterListItemComponent, (theme) => ({
 	container: {
-		marginVertical: 1,
+		marginVertical: 0.6,
 		backgroundColor: '#FFFFFF',
 	},
 	tweetWrapper: {
@@ -107,9 +107,8 @@ export const TweetComponent = withStyles(TwitterListItemComponent, (theme) => ({
 		...textStyle.paragraph,
 	},
 	dateIcon: {
-		width: 13,
-		height: 13,
-		marginBottom: 2,
+		width: 12,
+		height: 12,
 		tintColor: theme['text-hint-color'],
 	},
 }))

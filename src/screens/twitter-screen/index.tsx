@@ -23,14 +23,14 @@ export default (props: Props) => {
 	const ref = React.useRef(null)
 	useScrollToTop(ref)
 
+	const { loading, data, refetch, error } = useQuery(GET_TWEETS_QUERY, {
+		variables: {},
+	})
+
 	const handleRefresh = () => {
 		setRefreshing(true)
 		refetch().then(() => setRefreshing(false))
 	}
-
-	const { loading, data, refetch, error } = useQuery(GET_TWEETS_QUERY, {
-		variables: {},
-	})
 
 	if (error) {
 		console.log('Error here', error)
@@ -51,18 +51,23 @@ export default (props: Props) => {
 		return <TweetComponent {...item} />
 	}
 
-	return (
-		<AppLayout>
+	const headerItem = () => {
+		return (
 			<View style={style.headerStyle}>
 				<Text style={style.textStyle}>Trending Tweets</Text>
 			</View>
+		)
+	}
+
+	return (
+		<AppLayout>
 			<FlatList
+				ListHeaderComponent={headerItem}
 				contentContainerStyle={{ backgroundColor: theme.colors.background }}
 				style={{ backgroundColor: theme.colors.background }}
 				data={tweetsData}
 				renderItem={renderItem}
 				keyExtractor={(item) => item.tweet._id.toString()}
-				ItemSeparatorComponent={() => <View style={{ height: StyleSheet.hairlineWidth }} />}
 				ref={ref}
 				refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} colors={['#0000ff', '#689F38']} />}
 			/>
