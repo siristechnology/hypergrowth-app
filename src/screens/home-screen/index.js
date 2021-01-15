@@ -9,6 +9,7 @@ import Weather from './components/weather.component'
 import crashlytics from '@react-native-firebase/crashlytics'
 import { fetchfromAsync, storetoAsync } from '../../helper/cacheStorage'
 import { CircularSpinner } from '../../components/common'
+import StoryHeadline from './components/storyHeadline/storyHeadline'
 
 const Home = ({ navigation }) => {
 	const [englishDate, setEnglishDate] = useState('')
@@ -51,14 +52,31 @@ const Home = ({ navigation }) => {
 	}
 
 	const dataArticles = (data && data.getArticles && data.getArticles) || []
+	const storyArticles = (dataArticles.slice(0, 10))
+
+	const headerComponent = (
+		<>
+			<View style={style.headerStyle}>
+				<Text style={style.textStyle}>{englishDate}</Text>
+				<Weather />
+			</View>
+			<StoryHeadline
+				headlineArticles={storyArticles}
+				onShowArticleDetail={(article, articles) => navigation.navigate('ArticleDetail', { article, articles })}
+			/>
+		</>
+	)
+
 	if (dataArticles.length || localArticles.getArticles.length) {
 		return (
 			<AppLayout>
-				<View style={style.headerStyle}>
-					<Text style={style.textStyle}>{englishDate}</Text>
-					<Weather />
-				</View>
-				<ArticleListContainer navigation={navigation} articles={dataArticles} refreshing={refreshing} handleRefresh={handleRefresh} />
+				<ArticleListContainer
+					headerComponent={headerComponent}
+					navigation={navigation}
+					articles={dataArticles}
+					refreshing={refreshing}
+					handleRefresh={handleRefresh}
+				/>
 			</AppLayout>
 		)
 	} else {

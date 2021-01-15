@@ -6,7 +6,7 @@ import { useScrollToTop } from '@react-navigation/native'
 import { ArticleListItem } from './article.component'
 import { HeadlineComponent } from './headline.component'
 
-const ArticleListComponent = React.memo(({ articles, onItemPress, themedStyle, refreshing, handleRefresh }) => {
+const ArticleListComponent = React.memo(({ articles, onItemPress, themedStyle, refreshing, handleRefresh, headerComponent }) => {
 	const _onItemPress = (article) => {
 		onItemPress(article)
 	}
@@ -24,6 +24,7 @@ const ArticleListComponent = React.memo(({ articles, onItemPress, themedStyle, r
 
 	return (
 		<FlatList
+			ListHeaderComponent={headerComponent}
 			contentContainerStyle={themedStyle.container}
 			data={articles}
 			renderItem={renderItem}
