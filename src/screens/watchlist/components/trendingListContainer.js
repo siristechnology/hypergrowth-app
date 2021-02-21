@@ -26,11 +26,11 @@ const TrendingListContainer = (props) => {
 				<View style={styles.textView}>
 					<Text style={styles.textStyle}>{info.item.category}</Text>
 				</View>
-				{info.item.counts.map((iItem, i) => (
+				{/* {info.item.counts.map((iItem, i) => (
 					<View key={i}>
 						<TrendingCard onCardClick={onCardClick} trending={iItem} />
 					</View>
-				))}
+				))} */}
 			</View>
 		)
 	}
@@ -41,6 +41,8 @@ const TrendingListContainer = (props) => {
 			renderItem={renderCategory}
 			keyExtractor={(item, i) => `${i}`}
 			ref={ref}
+			numColumns={2}
+			horizontal={false}
 			refreshControl={<RefreshControl onRefresh={props.onRefresh} refreshing={props.refreshing} />}
 		/>
 	)
