@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, TouchableOpacity, Linking } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
 import { Avatar, Text } from 'react-native-ui-kitten/ui'
 import { withStyles } from 'react-native-ui-kitten/theme'
 
@@ -8,58 +8,45 @@ import { ArticleActivityBar } from '../../../components/articles'
 import { ClockIconOutline } from '../../../assets/icons'
 import { getRelativeTime } from '../../../helper/time'
 
-const TwitterListItemComponent = (props) => {
-	const { themedStyle, tweet } = props
+const ArticleListItemCompoent = (props) => {
+	const { article, themedStyle } = props
 
-	const handleTweetPress = () => {
-		const handle = tweet.handle
-		const link = `https://twitter.com/${handle}/status/${tweet.tweetId}`
-		Linking.openURL(link).catch((error) => {
-			throw new Error('Error opening twitter' + error)
-		})
-	}
-
-	const handleTwitterHandlePress = () => {
-		const handle = tweet.handle
-		const link = `https://twitter.com/${handle}`
-		Linking.openURL(link).catch((error) => {
-			throw new Error('Error opening twitter handle: ' + error)
-		})
+	const onPress = () => {
+		props.onPress(article)
 	}
 
 	return (
-		<View style={[themedStyle.container]}>
+		<TouchableOpacity onPress={onPress} activeOpacity={0.8} style={[themedStyle.container]}>
 			<View style={themedStyle.tweetWrapper}>
-				<TouchableOpacity style={themedStyle.leftWrapper} onPress={handleTwitterHandlePress}>
-					<Avatar source={{ uri: tweet.profileImage }} style={themedStyle.avatar} size="giant" />
-				</TouchableOpacity>
+				<View style={themedStyle.leftWrapper}>
+					<Avatar
+						source={{ uri: (article.imageLink.includes('data:image') && article.source.logoLink) || article.imageLink }}
+						style={themedStyle.avatar}
+						size="giant"
+					/>
+				</View>
 				<View style={themedStyle.rightWrapper}>
 					<View style={themedStyle.headerWrapper}>
 						<Text style={themedStyle.titleLabel} category="h6">
-							{tweet.name}
-						</Text>
-						<Text style={themedStyle.descriptionLabel} appearance="hint" category="s1">
-							{tweet.handle}
+							{article.title}
 						</Text>
 					</View>
-					<TouchableOpacity onPress={handleTweetPress}>
-						<Text>{tweet.text}</Text>
-					</TouchableOpacity>
+					<Text appearance="hint">{article.shortDescription ? article.shortDescription.substring(0, 100) + '...' : ''}</Text>
 					<ArticleActivityBar style={themedStyle.detailsContainer}>
 						<View style={themedStyle.dateContainer}>
 							{ClockIconOutline(themedStyle.dateIcon)}
 							<Text style={themedStyle.dateLabel} appearance="hint" category="p2">
-								{getRelativeTime(tweet.publishedDate)}
+								{getRelativeTime(article.createdDate)}
 							</Text>
 						</View>
 					</ArticleActivityBar>
 				</View>
 			</View>
-		</View>
+		</TouchableOpacity>
 	)
 }
 
-export const TweetComponent = withStyles(TwitterListItemComponent, (theme) => ({
+export const ArticleListItem = withStyles(ArticleListItemCompoent, (theme) => ({
 	container: {
 		marginVertical: 0.6,
 		backgroundColor: '#FFFFFF',
@@ -84,7 +71,6 @@ export const TweetComponent = withStyles(TwitterListItemComponent, (theme) => ({
 	},
 	titleLabel: {
 		...textStyle.caption1,
-		fontWeight: 'bold',
 	},
 	descriptionLabel: {
 		marginLeft: 4,

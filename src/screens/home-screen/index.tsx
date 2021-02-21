@@ -7,11 +7,11 @@ import { useQuery } from '@apollo/react-hooks'
 import AppLayout from '../../frame/app-layout'
 import { CircularSpinner } from '../../components/common'
 
-import { TweetComponent } from './components/tweet'
+import { ArticleListItem } from './components/article-list-item'
 import { StackNavigatorParamlist } from './types'
 import { useScrollToTop } from '@react-navigation/native'
 
-type TweetProps = React.ComponentProps<typeof TweetComponent>
+type TweetProps = React.ComponentProps<typeof ArticleListItem>
 
 type Props = {
 	navigation?: StackNavigationProp<StackNavigatorParamlist>
@@ -23,7 +23,7 @@ export default (props: Props) => {
 	const ref = React.useRef(null)
 	useScrollToTop(ref)
 
-	const { loading, data, refetch, error } = useQuery(GET_TWEETS_QUERY, {
+	const { loading, data, refetch, error } = useQuery(GET_ARTICLES_QUERY, {
 		variables: {},
 	})
 
@@ -44,17 +44,17 @@ export default (props: Props) => {
 		)
 	}
 
-	const tweets = (data && data.getTweets && data.getTweets) || []
-	const tweetsData = tweets.map((tweet) => ({ tweet }))
+	const articles = (data && data.getArticles && data.getArticles) || []
+	const articlesData = articles.map((article) => ({ article }))
 
 	const renderItem = ({ item }: { item: TweetProps }) => {
-		return <TweetComponent {...item} />
+		return <ArticleListItem {...item} />
 	}
 
 	const headerItem = () => {
 		return (
 			<View style={style.headerStyle}>
-				<Text style={style.textStyle}>Trending Tweets</Text>
+				<Text style={style.textStyle}>{'Nasdaq: 0.23  S&P 0.45'}</Text>
 			</View>
 		)
 	}
@@ -65,9 +65,9 @@ export default (props: Props) => {
 				ListHeaderComponent={headerItem}
 				contentContainerStyle={{ backgroundColor: theme.colors.background }}
 				style={{ backgroundColor: theme.colors.background }}
-				data={tweetsData}
+				data={articlesData}
 				renderItem={renderItem}
-				keyExtractor={(item) => item.tweet._id.toString()}
+				keyExtractor={(item) => item.article._id.toString()}
 				ref={ref}
 				refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} colors={['#0000ff', '#689F38']} />}
 			/>
@@ -75,17 +75,22 @@ export default (props: Props) => {
 	)
 }
 
-const GET_TWEETS_QUERY = gql`
-	query twitterScreenQuery {
-		getTweets {
+export const GET_ARTICLES_QUERY = gql`
+	query homeScreenQuery {
+		getArticles {
 			_id
-			text
-			name
-			tweetId
-			handle
-			profileImage
-			description
-			publishedDate
+			title
+			shortDescription
+			content
+			link
+			imageLink
+			createdDate
+			modifiedDate
+			category
+			source {
+				name
+				logoLink
+			}
 		}
 	}
 `
@@ -100,8 +105,7 @@ const style = StyleSheet.create({
 		paddingBottom: 10,
 	},
 	textStyle: {
-		fontWeight: 'bold',
-		fontSize: 26,
+		fontSize: 20,
 		paddingTop: 5,
 	},
 })

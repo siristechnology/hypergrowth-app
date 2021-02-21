@@ -6,8 +6,7 @@ import { RouteProp } from '@react-navigation/native'
 
 import overlay from './overlay'
 import HomeScreen from './screens/home-screen'
-import TwitterScreen from './screens/twitter-screen'
-import TrendingScreen from './screens/trending-screen/trending.screen'
+import WatchListScreen from './screens/watchlist'
 
 import { StackNavigatorParamlist } from './types'
 
@@ -41,8 +40,8 @@ export const BottomTabs = (props: Props) => {
 					}}
 				/>
 				<Tab.Screen
-					name="Trending"
-					component={TrendingScreen}
+					name="Watchlist"
+					component={WatchListScreen}
 					options={{
 						tabBarIcon: 'trending-up',
 						tabBarColor,
