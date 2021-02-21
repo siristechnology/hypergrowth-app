@@ -10,7 +10,13 @@ export const ArticleListContainer = ({ navigation, articles, refreshing, handleR
 
 	return (
 		((!articles || articles.length === 0) && <CircularSpinner />) || (
-			<ArticleList headerComponent={headerComponent} articles={articles} onItemPress={onItemPress} refreshing={refreshing} handleRefresh={handleRefresh} />
+			<ArticleList
+				headerComponent={headerComponent}
+				articles={articles}
+				onItemPress={onItemPress}
+				refreshing={refreshing}
+				handleRefresh={handleRefresh}
+			/>
 		)
 	)
 }
