@@ -1,6 +1,4 @@
 import moment from 'moment'
-import { convertNos } from './dateConverter'
-import { addLeadingZero } from './utils'
 
 moment.updateLocale('en', {
 	relativeTime: {
@@ -20,26 +18,4 @@ export const getRelativeTime = (date) => {
 	} else {
 		return moment(date).startOf('hour').fromNow()
 	}
-}
-
-export const getCurrentTime = () => {
-	let hours = moment().hours()
-	let minutes = moment().minutes()
-
-	if (hours < 10) {
-		hours = addLeadingZero(hours)
-	}
-	if (minutes < 10) {
-		minutes = addLeadingZero(minutes)
-	}
-	const currentTime = `${hours}:${minutes}`
-	const currentTimeInNepali = []
-	for (const letter of currentTime) {
-		if (letter == ':') {
-			currentTimeInNepali.push(letter)
-		} else {
-			currentTimeInNepali.push(convertNos(letter))
-		}
-	}
-	return currentTimeInNepali.join('')
 }

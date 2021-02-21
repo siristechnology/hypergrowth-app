@@ -33,10 +33,10 @@ export const BottomTabs = (props: Props) => {
 				sceneAnimationEnabled={false}
 			>
 				<Tab.Screen
-					name="Home"
+					name="News"
 					component={HomeScreen}
 					options={{
-						tabBarIcon: 'home-outline',
+						tabBarIcon: 'newspaper-variant-outline',
 						tabBarColor,
 					}}
 				/>
@@ -45,14 +45,6 @@ export const BottomTabs = (props: Props) => {
 					component={TrendingScreen}
 					options={{
 						tabBarIcon: 'trending-up',
-						tabBarColor,
-					}}
-				/>
-				<Tab.Screen
-					name="Twitter"
-					component={TwitterScreen}
-					options={{
-						tabBarIcon: 'twitter',
 						tabBarColor,
 					}}
 				/>
