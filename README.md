@@ -1,6 +1,6 @@
 # HyperGrowth App
 
-![Android Apk - Release & Google Play Publish](https://github.com/siristechnology/hypergrowth-app/workflows/Android%20Apk%20-%20Release%20&%20Google%20Play%20Publish/badge.svg)
+[![Android Apk - Build & Release](https://github.com/siristechnology/hypergrowth-app/actions/workflows/android-build-publish.yml/badge.svg)](https://github.com/siristechnology/hypergrowth-app/actions/workflows/android-build-publish.yml)
 [![DeepScan grade](https://deepscan.io/api/teams/5348/projects/7146/branches/66889/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=5348&pid=7146&bid=66889)
 [![Known Vulnerabilities](https://snyk.io/test/github/siristechnology/hypergrowth-app/badge.svg?targetFile=android/app/build.gradle)](https://snyk.io/test/github/siristechnology/hypergrowth-app?targetFile=android/app/build.gradle)
 
