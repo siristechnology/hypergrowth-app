@@ -6,7 +6,7 @@ import { withClientState } from 'apollo-link-state'
 import { ApolloLink, Observable } from 'apollo-link'
 import fetch from 'node-fetch'
 import crashlytics from '@react-native-firebase/crashlytics'
-import { BHN_SERVER } from 'react-native-dotenv'
+import { APP_SERVER } from 'react-native-dotenv'
 
 const cache = new InMemoryCache()
 
@@ -57,7 +57,7 @@ const client = new ApolloClient({
 			cache,
 		}),
 		new HttpLink({
-			uri: BHN_SERVER,
+			uri: APP_SERVER,
 			credentials: 'include',
 			fetch,
 		}),

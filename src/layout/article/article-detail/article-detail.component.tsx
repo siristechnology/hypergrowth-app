@@ -8,7 +8,7 @@ import { getRelativeTime } from '../../../helper/time'
 import { ClockIconOutline } from '../../../assets/icons'
 import { ArticleActivityBar } from '../../../components/articles'
 import { ContainerView, textStyle } from '../../../components/common'
-const BHN_APP_URL = 'https://play.google.com/store/apps/details?id=com.siristechnology.bollywoodhungama'
+const APP_URL = 'https://play.google.com/store/apps/details?id=com.siristechnology.hypergrowth'
 
 interface ComponentProps {
 	article
@@ -113,7 +113,7 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 	private shareButtonClick = () => {
 		const { title, link } = this.props.article
 		Share.share({
-			message: title + '  ' + link + ' #BHNApp ' + BHN_APP_URL,
+			message: title + '  ' + link + ' #HyperGrowthApp ' + APP_URL,
 			url: link,
 			title: title,
 		})

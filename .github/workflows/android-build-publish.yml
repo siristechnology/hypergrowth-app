@@ -39,14 +39,5 @@ jobs:
                   files: android/app/build/outputs/apk/signed/release/app-signed-release.apk
                   repo_token: ${{ secrets.GITHUB_TOKEN }}
                   automatic_release_tag: 'latest'
-                  title: 'BHN Beta - apk'
+                  title: 'HyperGrowth Beta - apk'
                   prerelease: false
-
-            - name: Publish Android Bundle to Google Play Store
-              uses: r0adkll/upload-google-play@v1
-              if: github.ref == 'refs/heads/master'
-              with:
-                  serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON_PLAIN_TEXT }}
-                  packageName: 'com.siristechnology.bollywoodhungama.beta'
-                  releaseFile: android/app/build/outputs/bundle/signedRelease/app-signed-release.aab
-                  track: production

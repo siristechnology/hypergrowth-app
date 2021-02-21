@@ -1,4 +1,4 @@
-package com.siristechnology.bollywoodhungama.beta;
+package com.siristechnology.hypergrowth.beta;
 
 import com.wix.detox.Detox;
 import com.wix.detox.config.DetoxConfig;

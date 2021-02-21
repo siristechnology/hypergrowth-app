@@ -3,14 +3,14 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '10.0'
 
-target 'bhn' do
+target 'hypergrowth' do
   config = use_native_modules!
 
   use_react_native!(:path => config["reactNativePath"])
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
-  target 'bhnTests' do
+  target 'hypergrowthTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -25,10 +25,10 @@ target 'bhn' do
   end
 end
 
-target 'bhn-tvOS' do
-  # Pods for bhn-tvOS
+target 'hypergrowth-tvOS' do
+  # Pods for hypergrowth-tvOS
 
-  target 'bhn-tvOSTests' do
+  target 'hypergrowth-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

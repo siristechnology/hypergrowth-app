@@ -135,7 +135,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.siristechnology.bollywoodhungama.beta"
+        applicationId "com.siristechnology.hypergrowth.beta"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1582496178
