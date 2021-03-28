@@ -52,7 +52,7 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 				<ContainerView style={themedStyle.container}>
 					<ImageBackground
 						style={[themedStyle.image, { height: (article.category == 'cartoon' && 350) || 175 }]}
-						source={{ uri: article.imageLink.includes("data:image") && article.source.logoLink || article.imageLink }}
+						source={{ uri: (article.imageUrl.includes('data:image') && article.source.logoLink) || article.imageUrl }}
 						imageStyle={{ resizeMode: (article.category == 'cartoon' && 'stretch') || 'cover' }}
 					>
 						<Avatar style={themedStyle.authorPhoto} size="large" source={{ uri: article.source.logoLink }} />

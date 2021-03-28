@@ -44,7 +44,7 @@ export default (props: Props) => {
 		)
 	}
 
-	const articles = (data && data.getArticles && data.getArticles) || []
+	const articles = (data && data.getStockNews) || []
 	const articlesData = articles.map((article) => ({ article }))
 
 	const renderItem = ({ item }: { item: TweetProps }) => {
@@ -77,19 +77,17 @@ export default (props: Props) => {
 
 export const GET_ARTICLES_QUERY = gql`
 	query homeScreenQuery {
-		getArticles {
+		getStockNews {
 			_id
-			title
-			shortDescription
-			content
-			link
-			imageLink
-			createdDate
-			modifiedDate
-			category
-			source {
-				name
-				logoLink
+			source
+			headline
+			summary
+			url
+			imageUrl
+			publishedDate
+			relatedStockSymbols
+			relatedStocks {
+				symbol
 			}
 		}
 	}

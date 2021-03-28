@@ -20,7 +20,7 @@ const ArticleListItemCompoent = (props) => {
 			<View style={themedStyle.tweetWrapper}>
 				<View style={themedStyle.leftWrapper}>
 					<Avatar
-						source={{ uri: (article.imageLink.includes('data:image') && article.source.logoLink) || article.imageLink }}
+						source={{ uri: (article.imageUrl.includes('data:image') && article.source.logoLink) || article.imageUrl }}
 						style={themedStyle.avatar}
 						size="giant"
 					/>
@@ -28,10 +28,10 @@ const ArticleListItemCompoent = (props) => {
 				<View style={themedStyle.rightWrapper}>
 					<View style={themedStyle.headerWrapper}>
 						<Text style={themedStyle.titleLabel} category="h6">
-							{article.title}
+							{article.headline}
 						</Text>
 					</View>
-					<Text appearance="hint">{article.shortDescription ? article.shortDescription.substring(0, 100) + '...' : ''}</Text>
+					<Text appearance="hint">{article.summary ? article.summary.substring(0, 100) + '...' : ''}</Text>
 					<ArticleActivityBar style={themedStyle.detailsContainer}>
 						<View style={themedStyle.dateContainer}>
 							{ClockIconOutline(themedStyle.dateIcon)}
