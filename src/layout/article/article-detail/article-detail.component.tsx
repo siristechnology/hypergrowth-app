@@ -51,56 +51,43 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 				</View>
 				<ContainerView style={themedStyle.container}>
 					<ImageBackground
-						style={[themedStyle.image, { height: (article.category == 'cartoon' && 350) || 175 }]}
+						style={[themedStyle.image, { height: 175 }]}
 						source={{ uri: (article.imageUrl.includes('data:image') && article.source.logoLink) || article.imageUrl }}
-						imageStyle={{ resizeMode: (article.category == 'cartoon' && 'stretch') || 'cover' }}
+						imageStyle={{ resizeMode: 'cover' }}
 					>
 						<Avatar style={themedStyle.authorPhoto} size="large" source={{ uri: article.source.logoLink }} />
 					</ImageBackground>
 
-					{(article.category != 'cartoon' && (
-						<View style={themedStyle.detailsContainer}>
-							<Text style={themedStyle.titleLabel} category="h5">
-								{article.title}
-							</Text>
-							<ArticleActivityBar>
-								<View style={themedStyle.dateContainer}>
-									{ClockIconOutline(themedStyle.dateIcon)}
-									<Text style={themedStyle.dateLabel} appearance="hint" category="p2">
-										{getRelativeTime(article.createdDate)}
-									</Text>
-								</View>
-							</ArticleActivityBar>
-							<Text category="s1" style={themedStyle.contentLabel}>
-								{article.content}
-							</Text>
-							{article.tags && article.tags.length > 0 && (
-								<View style={themedStyle.tagsView}>
-									{article.tags.map((tag, i) => (
-										<Text key={i} style={themedStyle.tags}>
-											#{tag}{' '}
-										</Text>
-									))}
-								</View>
-							)}
-							<View style={themedStyle.readMoreBtnWrapper}>
-								<Button onPress={this.handleLinkClick} style={themedStyle.readMoreBtn}>
-									READ MORE
-								</Button>
+					<View style={themedStyle.detailsContainer}>
+						<Text style={themedStyle.titleLabel} category="h5">
+							{article.headline}
+						</Text>
+						<ArticleActivityBar>
+							<View style={themedStyle.dateContainer}>
+								{ClockIconOutline(themedStyle.dateIcon)}
+								<Text style={themedStyle.dateLabel} appearance="hint" category="p2">
+									{getRelativeTime(article.createdDate)}
+								</Text>
 							</View>
-						</View>
-					)) || (
-						<View style={themedStyle.detailsContainer}>
-							<ArticleActivityBar>
-								<View style={[themedStyle.dateContainer, { marginTop: 30 }]}>
-									{ClockIconOutline(themedStyle.dateIcon)}
-									<Text style={themedStyle.dateLabel} appearance="hint" category="p2">
-										{getRelativeTime(article.createdDate)}
+						</ArticleActivityBar>
+						<Text category="s1" style={themedStyle.contentLabel}>
+							{article.summary}
+						</Text>
+						{article.tags && article.tags.length > 0 && (
+							<View style={themedStyle.tagsView}>
+								{article.tags.map((tag, i) => (
+									<Text key={i} style={themedStyle.tags}>
+										#{tag}{' '}
 									</Text>
-								</View>
-							</ArticleActivityBar>
+								))}
+							</View>
+						)}
+						<View style={themedStyle.readMoreBtnWrapper}>
+							<Button onPress={this.handleLinkClick} style={themedStyle.readMoreBtn}>
+								READ MORE
+							</Button>
 						</View>
-					)}
+					</View>
 				</ContainerView>
 			</View>
 		)
@@ -120,8 +107,8 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 	}
 
 	private handleLinkClick = () => {
-		const link = this.props.article.link
-		this.props.navigation.navigate('Article', { link })
+		const url = this.props.article.url
+		this.props.navigation.navigate('Article', { url })
 	}
 }
 

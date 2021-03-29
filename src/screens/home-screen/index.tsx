@@ -48,7 +48,7 @@ export default (props: Props) => {
 	const articlesData = articles.map((article) => ({ article }))
 
 	const renderItem = ({ item }: { item: TweetProps }) => {
-		return <ArticleListItem {...item} />
+		return <ArticleListItem {...item} navigation={props.navigation} />
 	}
 
 	const headerItem = () => {

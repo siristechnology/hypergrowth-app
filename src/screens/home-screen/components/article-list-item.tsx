@@ -9,10 +9,10 @@ import { ClockIconOutline } from '../../../assets/icons'
 import { getRelativeTime } from '../../../helper/time'
 
 const ArticleListItemCompoent = (props) => {
-	const { article, themedStyle } = props
+	const { article, navigation, themedStyle } = props
 
 	const onPress = () => {
-		props.onPress(article)
+		navigation.navigate('ArticleDetail', { article })
 	}
 
 	return (
