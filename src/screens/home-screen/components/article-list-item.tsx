@@ -2,6 +2,7 @@ import React from 'react'
 import { View, TouchableOpacity } from 'react-native'
 import { Avatar, Text } from 'react-native-ui-kitten/ui'
 import { withStyles } from 'react-native-ui-kitten/theme'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import { textStyle } from '../../../components/common'
 import { ArticleActivityBar } from '../../../components/articles'
@@ -33,10 +34,16 @@ const ArticleListItemCompoent = (props) => {
 					</View>
 					<Text appearance="hint">{article.summary ? article.summary.substring(0, 100) + '...' : ''}</Text>
 					<ArticleActivityBar style={themedStyle.detailsContainer}>
-						<View style={themedStyle.dateContainer}>
+						<View style={themedStyle.bottomLabelContainer}>
 							{ClockIconOutline(themedStyle.dateIcon)}
-							<Text style={themedStyle.dateLabel} appearance="hint" category="p2">
+							<Text style={themedStyle.bottomLabel} appearance="hint" category="p2">
 								{getRelativeTime(article.createdDate)}
+							</Text>
+						</View>
+						<View style={themedStyle.bottomLabelContainer}>
+							<MaterialCommunityIcons name="equalizer-outline" size={12} color={'gray'} />
+							<Text style={themedStyle.bottomLabel} appearance="hint" category="p2">
+								{article.relatedStockSymbols}
 							</Text>
 						</View>
 					</ArticleActivityBar>
@@ -77,18 +84,21 @@ export const ArticleListItem = withStyles(ArticleListItemCompoent, (theme) => ({
 		...textStyle.subtitle,
 	},
 	detailsContainer: {
-		paddingTop: 2,
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'flex-start',
+		marginTop: 6,
 	},
 	tweetText: {
 		flex: 1,
 		flexWrap: 'wrap',
 	},
-	dateContainer: {
+	bottomLabelContainer: {
 		flexDirection: 'row',
 		alignItems: 'center',
-		marginTop: 4,
+		marginRight: 6,
 	},
-	dateLabel: {
+	bottomLabel: {
 		marginLeft: 2,
 		...textStyle.paragraph,
 	},
@@ -96,5 +106,8 @@ export const ArticleListItem = withStyles(ArticleListItemCompoent, (theme) => ({
 		width: 12,
 		height: 12,
 		tintColor: theme['text-hint-color'],
+	},
+	icon: {
+		color: theme['text-hint-color'],
 	},
 }))

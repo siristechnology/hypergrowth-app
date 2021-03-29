@@ -2,13 +2,13 @@ import moment from 'moment'
 
 moment.updateLocale('en', {
 	relativeTime: {
-		past: '%s ago',
-		m: '1 minute',
-		mm: '%d minute',
-		h: '1 hour',
-		hh: '%d hour',
-		d: '1 day',
-		dd: '%d day',
+		past: '%s',
+		m: '1m',
+		mm: '%dm',
+		h: '1h',
+		hh: '%dh',
+		d: '1d',
+		dd: '%dd',
 	},
 })
 export const getRelativeTime = (date) => {
