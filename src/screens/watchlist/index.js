@@ -4,9 +4,8 @@ import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import AppLayout from '../../frame/app-layout'
 import { CircularSpinner } from '../../components/common'
-import TrendingListContainer from './components/trendingListContainer'
 import crashlytics from '@react-native-firebase/crashlytics'
-import { DataTable } from 'react-native-paper'
+import SortableList from './sortable-list'
 
 const TrendingComponent = () => {
 	const [refreshing, setRefreshing] = useState(false)
@@ -39,29 +38,7 @@ const TrendingComponent = () => {
 			<View style={style.headerStyle}>
 				<Text style={style.textStyle}>Watchlist</Text>
 			</View>
-			<DataTable>
-				<DataTable.Header>
-					<DataTable.Title style={style.tableHeaderStyle}>Dessert</DataTable.Title>
-					<DataTable.Title style={style.tableHeaderStyle}>Dessert</DataTable.Title>
-					<DataTable.Title style={style.tableHeaderStyle}>Dessert</DataTable.Title>
-					<DataTable.Title numeric>Calories</DataTable.Title>
-					<DataTable.Title numeric>Fat</DataTable.Title>
-				</DataTable.Header>
-
-				<DataTable.Row>
-					<DataTable.Cell>Frozen yogurt</DataTable.Cell>
-					<DataTable.Cell numeric>159</DataTable.Cell>
-					<DataTable.Cell numeric>6.0</DataTable.Cell>
-				</DataTable.Row>
-
-				<DataTable.Row>
-					<DataTable.Cell>Ice cream sandwich</DataTable.Cell>
-					<DataTable.Cell numeric>237</DataTable.Cell>
-					<DataTable.Cell numeric>8.0</DataTable.Cell>
-				</DataTable.Row>
-			</DataTable>
-
-			<TrendingListContainer trending={trendings} refreshing={refreshing} onRefresh={handleRefresh} />
+			<SortableList />
 		</AppLayout>
 	)
 }
