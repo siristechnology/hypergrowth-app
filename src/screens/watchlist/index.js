@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/react-hooks'
 import AppLayout from '../../frame/app-layout'
 import { CircularSpinner } from '../../components/common'
 import crashlytics from '@react-native-firebase/crashlytics'
-import SortableList from './sortable-list'
+import SortableList from './components/sortable-list'
 
 const TrendingComponent = () => {
 	const [refreshing, setRefreshing] = useState(false)
@@ -31,14 +31,12 @@ const TrendingComponent = () => {
 		)
 	}
 
-	const trendings = (data && data.getArticles) || []
-
 	return (
 		<AppLayout>
 			<View style={style.headerStyle}>
 				<Text style={style.textStyle}>Watchlist</Text>
 			</View>
-			<SortableList />
+			<SortableList data={data.getWatchList} onRefresh={handleRefresh} refreshing={refreshing} />
 		</AppLayout>
 	)
 }
@@ -64,20 +62,10 @@ const style = StyleSheet.create({
 
 export const GET_WATCHLIST_QUERY = gql`
 	query watchlistQuery {
-		getArticles {
-			_id
-			title
-			shortDescription
-			content
-			link
-			imageLink
-			createdDate
-			modifiedDate
-			category
-			source {
-				name
-				logoLink
-			}
+		getWatchList {
+			symbol
+			price
+			change
 		}
 	}
 `
