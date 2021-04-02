@@ -7,13 +7,10 @@ import { CircularSpinner } from '../../components/common'
 import crashlytics from '@react-native-firebase/crashlytics'
 import SortableList from './components/sortable-list'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-// import { Autocomplete } from '@ui-kitten/components'
-import Autocomplete from 'react-native-autocomplete-input'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import StockSearch from './components/StockSearch'
 
 const TrendingComponent = () => {
 	const [refreshing, setRefreshing] = useState(false)
-	const [searchQuery, setSearchQuery] = useState('')
 	const [showSearch, setShowSearch] = useState(false)
 
 	const handleRefresh = () => {
@@ -37,33 +34,18 @@ const TrendingComponent = () => {
 		)
 	}
 
-	const searchResult = ['aa', 'bb', 'cc'].filter((i) => i.indexOf(searchQuery) >= 0)
-
 	return (
 		<AppLayout>
 			<View style={style.headerStyle}>
-				<View>{!showSearch && <Text style={style.textStyle}>Watchlist</Text>}</View>
-				<Icon name="magnify" size={24} color="#000" onPress={() => setShowSearch(true)} />
+				{!showSearch && <Text style={style.textStyle}>Watchlist</Text>}
+				{showSearch && (
+					<View style={style.autocompleteContainer}>
+						<StockSearch />
+					</View>
+				)}
+				<Icon name="magnify" size={24} color="#000" onPress={() => setShowSearch(!showSearch)} />
 			</View>
 			<SortableList data={data.getWatchList} onRefresh={handleRefresh} refreshing={refreshing} />
-			{showSearch && (
-				<View style={style.autocompleteContainer}>
-					<Autocomplete
-						keyExtractor={(item) => item}
-						data={searchResult}
-						defaultValue={searchQuery}
-						onChangeText={(text) => setSearchQuery(text)}
-						showSoftInputOnFocus={true}
-						renderItem={({ item, i }) => (
-							<TouchableOpacity onPress={() => setSearchQuery(item)}>
-								<Text>{item}</Text>
-							</TouchableOpacity>
-						)}
-						style={style.autocomplete}
-					/>
-					<Icon name="magnify" size={24} color="#000" onPress={() => setShowSearch(true)} />
-				</View>
-			)}
 		</AppLayout>
 	)
 }
@@ -86,11 +68,10 @@ const style = StyleSheet.create({
 	rightTopButtonContainer: {},
 	autocompleteContainer: {
 		flex: 1,
-		position: 'absolute',
-		paddingTop: 10,
-		height: 120,
-		left: 10,
-		right: 100,
+		padding: 0,
+		// height: 120,
+		// left: 10,
+		// right: 100,
 		// top: 0,
 		zIndex: 1,
 	},
