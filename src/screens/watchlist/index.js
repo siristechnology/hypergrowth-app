@@ -7,7 +7,7 @@ import { CircularSpinner } from '../../components/common'
 import crashlytics from '@react-native-firebase/crashlytics'
 import SortableList from './components/sortable-list'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-// import { Autocomplete } from 'react-native-ui-kitten'
+// import { Autocomplete } from '@ui-kitten/components'
 import Autocomplete from 'react-native-autocomplete-input'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 

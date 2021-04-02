@@ -1,7 +1,7 @@
 import React from 'react'
 import { ImageBackground, View, Share } from 'react-native'
-import { ThemedComponentProps, ThemeType, withStyles } from 'react-native-ui-kitten/theme'
-import { Avatar, Text, Button } from 'react-native-ui-kitten/ui'
+import { ThemedComponentProps, ThemeType, withStyles } from '@ui-kitten/components/theme'
+import { Avatar, Text, Button } from '@ui-kitten/components/ui'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
 import { getRelativeTime } from '../../../helper/time'
@@ -19,7 +19,7 @@ export type ArticleDetailComponentProps = ThemedComponentProps & ComponentProps
 
 class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentProps> {
 	public render(): React.ReactNode {
-		const { themedStyle, article } = this.props
+		const { eva, article } = this.props
 		const BackIcon = (
 			<AntDesign
 				name="back"
@@ -44,46 +44,46 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 		)
 
 		return (
-			<View style={themedStyle.articleContainerView}>
-				<View style={themedStyle.headerStyle}>
+			<View style={eva.style.articleContainerView}>
+				<View style={eva.style.headerStyle}>
 					{BackIcon}
 					{shareButton}
 				</View>
-				<ContainerView style={themedStyle.container}>
+				<ContainerView style={eva.style.container}>
 					<ImageBackground
-						style={[themedStyle.image, { height: 175 }]}
+						style={[eva.style.image, { height: 175 }]}
 						source={{ uri: (article.imageUrl.includes('data:image') && article.source.logoLink) || article.imageUrl }}
 						imageStyle={{ resizeMode: 'cover' }}
 					>
-						<Avatar style={themedStyle.authorPhoto} size="large" source={{ uri: article.source.logoLink }} />
+						<Avatar style={eva.style.authorPhoto} size="large" source={{ uri: article.source.logoLink }} />
 					</ImageBackground>
 
-					<View style={themedStyle.detailsContainer}>
-						<Text style={themedStyle.titleLabel} category="h5">
+					<View style={eva.style.detailsContainer}>
+						<Text style={eva.style.titleLabel} category="h5">
 							{article.headline}
 						</Text>
 						<ArticleActivityBar>
-							<View style={themedStyle.dateContainer}>
-								{ClockIconOutline(themedStyle.dateIcon)}
-								<Text style={themedStyle.dateLabel} appearance="hint" category="p2">
+							<View style={eva.style.dateContainer}>
+								{ClockIconOutline(eva.style.dateIcon)}
+								<Text style={eva.style.dateLabel} appearance="hint" category="p2">
 									{getRelativeTime(article.createdDate)}
 								</Text>
 							</View>
 						</ArticleActivityBar>
-						<Text category="s1" style={themedStyle.contentLabel}>
+						<Text category="s1" style={eva.style.contentLabel}>
 							{article.summary}
 						</Text>
 						{article.tags && article.tags.length > 0 && (
-							<View style={themedStyle.tagsView}>
+							<View style={eva.style.tagsView}>
 								{article.tags.map((tag, i) => (
-									<Text key={i} style={themedStyle.tags}>
+									<Text key={i} style={eva.style.tags}>
 										#{tag}{' '}
 									</Text>
 								))}
 							</View>
 						)}
-						<View style={themedStyle.readMoreBtnWrapper}>
-							<Button onPress={this.handleLinkClick} style={themedStyle.readMoreBtn}>
+						<View style={eva.style.readMoreBtnWrapper}>
+							<Button onPress={this.handleLinkClick} style={eva.style.readMoreBtn}>
 								READ MORE
 							</Button>
 						</View>

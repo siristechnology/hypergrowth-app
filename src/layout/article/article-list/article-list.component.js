@@ -1,17 +1,17 @@
 import React from 'react'
 import { FlatList, RefreshControl } from 'react-native'
-import { withStyles } from 'react-native-ui-kitten/theme'
+import { withStyles } from '@ui-kitten/components/theme'
 import { useScrollToTop } from '@react-navigation/native'
 
 import { ArticleListItem } from './article.component'
 
-const ArticleListComponent = React.memo(({ articles, onItemPress, themedStyle, refreshing, handleRefresh, headerComponent }) => {
+const ArticleListComponent = React.memo(({ articles, onItemPress, eva, refreshing, handleRefresh, headerComponent }) => {
 	const _onItemPress = (article) => {
 		onItemPress(article)
 	}
 
 	const renderItem = ({ item, index }) => {
-		return <ArticleListItem style={themedStyle.item} article={item} onPress={() => _onItemPress(item)} />
+		return <ArticleListItem style={eva.style.item} article={item} onPress={() => _onItemPress(item)} />
 	}
 
 	const ref = React.useRef(null)
@@ -20,7 +20,7 @@ const ArticleListComponent = React.memo(({ articles, onItemPress, themedStyle, r
 	return (
 		<FlatList
 			ListHeaderComponent={headerComponent}
-			contentContainerStyle={themedStyle.container}
+			contentContainerStyle={eva.style.container}
 			data={articles}
 			renderItem={renderItem}
 			keyExtractor={(item) => item._id}

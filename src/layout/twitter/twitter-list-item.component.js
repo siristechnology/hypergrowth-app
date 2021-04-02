@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, TouchableOpacity, Linking } from 'react-native'
-import { Avatar, Text } from 'react-native-ui-kitten/ui'
-import { withStyles } from 'react-native-ui-kitten/theme'
+import { Avatar, Text } from '@ui-kitten/components/ui'
+import { withStyles } from '@ui-kitten/components/theme'
 
 import { textStyle } from '../../components/common'
 import { ArticleActivityBar } from '../../components/articles'
@@ -9,7 +9,7 @@ import { ClockIconOutline } from '../../assets/icons'
 import { getRelativeTime } from '../../helper/time'
 
 const TwitterListItemComponent = (props) => {
-	const { themedStyle, tweet } = props
+	const { eva, tweet } = props
 	const handleTweetPress = () => {
 		const handle = tweet.handle
 		const link = `https://twitter.com/${handle}/status/${tweet.tweetId}`
@@ -27,27 +27,27 @@ const TwitterListItemComponent = (props) => {
 	}
 
 	return (
-		<View style={[themedStyle.container]}>
-			<View style={themedStyle.tweetWrapper}>
-				<TouchableOpacity style={themedStyle.leftWrapper} onPress={handleTwitterHandlePress}>
-					<Avatar source={{ uri: tweet.profileImage }} style={themedStyle.avatar} size="giant" />
+		<View style={[eva.style.container]}>
+			<View style={eva.style.tweetWrapper}>
+				<TouchableOpacity style={eva.style.leftWrapper} onPress={handleTwitterHandlePress}>
+					<Avatar source={{ uri: tweet.profileImage }} style={eva.style.avatar} size="giant" />
 				</TouchableOpacity>
-				<View style={themedStyle.rightWrapper}>
-					<View style={themedStyle.headerWrapper}>
-						<Text style={themedStyle.titleLabel} category="h6">
+				<View style={eva.style.rightWrapper}>
+					<View style={eva.style.headerWrapper}>
+						<Text style={eva.style.titleLabel} category="h6">
 							{tweet.name}
 						</Text>
-						<Text style={themedStyle.descriptionLabel} appearance="hint" category="s1">
+						<Text style={eva.style.descriptionLabel} appearance="hint" category="s1">
 							{tweet.handle}
 						</Text>
 					</View>
 					<TouchableOpacity onPress={handleTweetPress}>
 						<Text>{tweet.text}</Text>
 					</TouchableOpacity>
-					<ArticleActivityBar style={themedStyle.detailsContainer}>
-						<View style={themedStyle.dateContainer}>
-							{ClockIconOutline(themedStyle.dateIcon)}
-							<Text style={themedStyle.dateLabel} appearance="hint" category="p2">
+					<ArticleActivityBar style={eva.style.detailsContainer}>
+						<View style={eva.style.dateContainer}>
+							{ClockIconOutline(eva.style.dateIcon)}
+							<Text style={eva.style.dateLabel} appearance="hint" category="p2">
 								{getRelativeTime(tweet.publishedDate)}
 							</Text>
 						</View>

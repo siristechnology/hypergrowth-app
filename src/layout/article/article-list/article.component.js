@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, TouchableOpacity, Linking } from 'react-native'
-import { Avatar, Text } from 'react-native-ui-kitten/ui'
-import { withStyles } from 'react-native-ui-kitten/theme'
+import { Avatar, Text } from '@ui-kitten/components/ui'
+import { withStyles } from '@ui-kitten/components/theme'
 
 import { textStyle } from '../../../components/common'
 import { ArticleActivityBar } from '../../../components/articles'
@@ -9,33 +9,33 @@ import { ClockIconOutline } from '../../../assets/icons'
 import { getRelativeTime } from '../../../helper/time'
 
 const ArticleListItemCompoent = (props) => {
-	const { article, themedStyle } = props
+	const { article, eva.style } = props
 
 	const onPress = () => {
 		props.onPress(article)
 	}
 
 	return (
-		<TouchableOpacity onPress={onPress} activeOpacity={0.8} style={[themedStyle.container]}>
-			<View style={themedStyle.tweetWrapper}>
-				<View style={themedStyle.leftWrapper}>
+		<TouchableOpacity onPress={onPress} activeOpacity={0.8} style={[eva.style.container]}>
+			<View style={eva.style.tweetWrapper}>
+				<View style={eva.style.leftWrapper}>
 					<Avatar
 						source={{ uri: (article.imageUrl.includes('data:image') && article.source.logoLink) || article.imageUrl }}
-						style={themedStyle.avatar}
+						style={eva.style.avatar}
 						size="giant"
 					/>
 				</View>
-				<View style={themedStyle.rightWrapper}>
-					<View style={themedStyle.headerWrapper}>
-						<Text style={themedStyle.titleLabel} category="h6">
+				<View style={eva.style.rightWrapper}>
+					<View style={eva.style.headerWrapper}>
+						<Text style={eva.style.titleLabel} category="h6">
 							{article.headline}
 						</Text>
 					</View>
 					<Text appearance="hint">{article.shortDescription ? article.shortDescription.substring(0, 100) + '...' : ''}</Text>
-					<ArticleActivityBar style={themedStyle.detailsContainer}>
-						<View style={themedStyle.dateContainer}>
-							{ClockIconOutline(themedStyle.dateIcon)}
-							<Text style={themedStyle.dateLabel} appearance="hint" category="p2">
+					<ArticleActivityBar style={eva.style.detailsContainer}>
+						<View style={eva.style.dateContainer}>
+							{ClockIconOutline(eva.style.dateIcon)}
+							<Text style={eva.style.dateLabel} appearance="hint" category="p2">
 								{getRelativeTime(article.createdDate)}
 							</Text>
 						</View>

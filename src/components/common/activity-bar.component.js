@@ -1,12 +1,12 @@
 import React from 'react'
 import { View } from 'react-native'
-import { withStyles } from 'react-native-ui-kitten/theme'
+import { withStyles } from '@ui-kitten/components/theme'
 
 const ActivityBarComponent = (props) => {
-	const { style, themedStyle, children, ...restProps } = props
+	const { style, eva, children, ...restProps } = props
 
 	return (
-		<View style={[themedStyle.container, style]} {...restProps}>
+		<View style={[eva.style.container, style]} {...restProps}>
 			{children}
 		</View>
 	)
