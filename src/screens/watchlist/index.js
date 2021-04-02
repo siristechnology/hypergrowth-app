@@ -42,28 +42,28 @@ const TrendingComponent = () => {
 	return (
 		<AppLayout>
 			<View style={style.headerStyle}>
-				<Text style={style.textStyle}>Watchlist</Text>
+				<View>{!showSearch && <Text style={style.textStyle}>Watchlist</Text>}</View>
 				<Icon name="magnify" size={24} color="#000" onPress={() => setShowSearch(true)} />
-				{showSearch && (
-					<View style={style.autocompleteContainer}>
-						<Autocomplete
-							keyExtractor={(item) => item}
-							data={searchResult}
-							defaultValue={searchQuery}
-							onChangeText={(text) => setSearchQuery(text)}
-							showSoftInputOnFocus={true}
-							renderItem={({ item, i }) => (
-								<TouchableOpacity onPress={() => setSearchQuery(item)}>
-									<Text>{item}</Text>
-								</TouchableOpacity>
-							)}
-							accessoryRight={() => {}}
-						/>
-						<Icon name="magnify" size={24} color="#000" onPress={() => setShowSearch(true)} />
-					</View>
-				)}
 			</View>
 			<SortableList data={data.getWatchList} onRefresh={handleRefresh} refreshing={refreshing} />
+			{showSearch && (
+				<View style={style.autocompleteContainer}>
+					<Autocomplete
+						keyExtractor={(item) => item}
+						data={searchResult}
+						defaultValue={searchQuery}
+						onChangeText={(text) => setSearchQuery(text)}
+						showSoftInputOnFocus={true}
+						renderItem={({ item, i }) => (
+							<TouchableOpacity onPress={() => setSearchQuery(item)}>
+								<Text>{item}</Text>
+							</TouchableOpacity>
+						)}
+						style={style.autocomplete}
+					/>
+					<Icon name="magnify" size={24} color="#000" onPress={() => setShowSearch(true)} />
+				</View>
+			)}
 		</AppLayout>
 	)
 }
@@ -86,12 +86,15 @@ const style = StyleSheet.create({
 	rightTopButtonContainer: {},
 	autocompleteContainer: {
 		flex: 1,
-		left: 0,
 		position: 'absolute',
-		right: 0,
-		top: 0,
+		paddingTop: 10,
+		height: 120,
+		left: 10,
+		right: 100,
+		// top: 0,
 		zIndex: 1,
 	},
+	autocomplete: {},
 })
 
 export const GET_WATCHLIST_QUERY = gql`
