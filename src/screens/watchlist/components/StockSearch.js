@@ -10,13 +10,20 @@ const StockSearch = () => {
 	const [data, setData] = React.useState([])
 
 	useEffect(() => {
+		let isMounted = true
 		requestDataWithDebounce()
 			.then((response) => response.json())
 			.then((json) => json.movies)
 			.then((options) => {
 				return options.filter((item) => item.title.toLowerCase().includes(query.toLowerCase()))
 			})
-			.then(setData)
+			.then((stocks) => {
+				if (isMounted) setData(stocks)
+			})
+
+		return () => {
+			isMounted = false
+		}
 	}, [query])
 
 	const onSelect = (index: number) => {
