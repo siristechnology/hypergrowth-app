@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, TouchableOpacity } from 'react-native'
-import { Avatar, Text } from '@ui-kitten/components/ui'
+import { Text } from '@ui-kitten/components/ui'
 import { withStyles } from '@ui-kitten/components/theme'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
@@ -8,6 +8,7 @@ import { textStyle } from '../../../components/common'
 import { ArticleActivityBar } from '../../../components/articles'
 import { ClockIconOutline } from '../../../assets/icons'
 import { getRelativeTime } from '../../../helper/time'
+import TextAvatar from '../../../components/text-avatar'
 
 const ArticleListItemCompoent = (props) => {
 	const { article, navigation, eva } = props
@@ -20,11 +21,7 @@ const ArticleListItemCompoent = (props) => {
 		<TouchableOpacity onPress={onPress} activeOpacity={0.8} style={[eva.style.container]}>
 			<View style={eva.style.tweetWrapper}>
 				<View style={eva.style.leftWrapper}>
-					<Avatar
-						source={{ uri: (article.imageUrl.includes('data:image') && article.source.logoLink) || article.imageUrl }}
-						style={eva.style.avatar}
-						size="giant"
-					/>
+					<TextAvatar text={article.relatedStocks[0].symbol} />
 				</View>
 				<View style={eva.style.rightWrapper}>
 					<View style={eva.style.headerWrapper}>
@@ -43,7 +40,7 @@ const ArticleListItemCompoent = (props) => {
 						<View style={eva.style.bottomLabelContainer}>
 							<MaterialCommunityIcons name="equalizer-outline" size={12} color={'gray'} />
 							<Text style={eva.style.bottomLabel} appearance="hint" category="p2">
-								{article.relatedStockSymbols}
+								{article.relatedStocks[0].change || 0}%
 							</Text>
 						</View>
 					</ArticleActivityBar>

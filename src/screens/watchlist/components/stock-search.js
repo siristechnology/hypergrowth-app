@@ -20,7 +20,6 @@ const StockSearch = () => {
 			.then((stocks) => {
 				if (isMounted) setData(stocks)
 			})
-
 		return () => {
 			isMounted = false
 		}

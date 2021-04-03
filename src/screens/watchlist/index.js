@@ -7,7 +7,7 @@ import { CircularSpinner } from '../../components/common'
 import crashlytics from '@react-native-firebase/crashlytics'
 import SortableList from './components/sortable-list'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import StockSearch from './components/StockSearch'
+import StockSearch from './components/stock-search'
 
 const TrendingComponent = () => {
 	const [refreshing, setRefreshing] = useState(false)
