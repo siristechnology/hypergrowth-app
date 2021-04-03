@@ -1,45 +1,50 @@
 import React, { useEffect } from 'react'
-import AwesomeDebouncePromise from 'awesome-debounce-promise'
 import { Autocomplete, AutocompleteItem } from '@ui-kitten/components'
-
-const requestData = () => fetch('https://reactnative.dev/movies.json')
-const requestDataWithDebounce = AwesomeDebouncePromise(requestData, 400)
+import gql from 'graphql-tag'
+import { useLazyQuery } from '@apollo/client'
 
 const StockSearch = () => {
-	const [query, setQuery] = React.useState('')
-	const [data, setData] = React.useState([])
+	const [searchTerm, setSearchTerm] = React.useState('')
+
+	const [searchStocks, { data }] = useLazyQuery(SEARCH_STOCKS_QUERY, {
+		variables: { searchTerm },
+	})
 
 	useEffect(() => {
 		let isMounted = true
-		requestDataWithDebounce()
-			.then((response) => response.json())
-			.then((json) => json.movies)
-			.then((options) => {
-				return options.filter((item) => item.title.toLowerCase().includes(query.toLowerCase()))
-			})
-			.then((stocks) => {
-				if (isMounted) setData(stocks)
-			})
+		if (isMounted) searchStocks()
+
+		console.log('searching again with ', searchTerm)
+
 		return () => {
 			isMounted = false
 		}
-	}, [query])
+	}, [searchStocks, searchTerm])
 
 	const onSelect = (index: number) => {
-		setQuery(data[index].title)
+		setSearchTerm(data.searchStocks[index].symbol)
 	}
 
 	const onChangeText = (nextQuery) => {
-		setQuery(nextQuery)
+		setSearchTerm(nextQuery)
 	}
 
-	const renderOption = (item, index) => <AutocompleteItem key={index} title={item.title} />
+	const renderOption = (item, index) => <AutocompleteItem key={index} title={item.symbol + ' | ' + item.company} />
 
 	return (
-		<Autocomplete placeholder="Search Symbols: e.g. AAPL" value={query} onChangeText={onChangeText} onSelect={onSelect}>
-			{data.map(renderOption)}
+		<Autocomplete placeholder="Search Symbols: e.g. AAPL" value={searchTerm} onChangeText={onChangeText} onSelect={onSelect}>
+			{data && data.searchStocks.map(renderOption)}
 		</Autocomplete>
 	)
 }
+
+export const SEARCH_STOCKS_QUERY = gql`
+	query searchStocksQuery($searchTerm: String!) {
+		searchStocks(searchTerm: $searchTerm) {
+			symbol
+			company
+		}
+	}
+`
 
 export default StockSearch
