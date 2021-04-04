@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, TouchableOpacity } from 'react-native'
+import { View, TouchableNativeFeedback } from 'react-native'
 import { Text } from '@ui-kitten/components/ui'
 import { withStyles } from '@ui-kitten/components/theme'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -18,8 +18,8 @@ const ArticleListItemCompoent = (props) => {
 	}
 
 	return (
-		<TouchableOpacity onPress={onPress} activeOpacity={0.8} style={[eva.style.container]}>
-			<View style={eva.style.tweetWrapper}>
+		<TouchableNativeFeedback onPress={onPress} style={[eva.style.container]}>
+			<View style={eva.style.itemWrapper}>
 				<View style={eva.style.leftWrapper}>
 					<TextAvatar text={article.relatedStocks[0].symbol} />
 				</View>
@@ -46,19 +46,19 @@ const ArticleListItemCompoent = (props) => {
 					</ArticleActivityBar>
 				</View>
 			</View>
-		</TouchableOpacity>
+		</TouchableNativeFeedback>
 	)
 }
 
 export const ArticleListItem = withStyles(ArticleListItemCompoent, (theme) => ({
 	container: {
 		marginVertical: 0.6,
-		backgroundColor: '#FFFFFF',
 	},
-	tweetWrapper: {
-		padding: 4,
-		marginVertical: 6,
+	itemWrapper: {
+		paddingHorizontal: 4,
+		paddingVertical: 8,
 		flexDirection: 'row',
+		backgroundColor: 'white',
 	},
 	rightWrapper: {
 		flex: 1,

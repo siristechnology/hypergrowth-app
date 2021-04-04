@@ -13,8 +13,6 @@ const StockSearch = () => {
 		let isMounted = true
 		if (isMounted) searchStocks()
 
-		console.log('searching again with ', searchTerm)
-
 		return () => {
 			isMounted = false
 		}

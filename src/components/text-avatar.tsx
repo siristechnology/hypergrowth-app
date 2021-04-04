@@ -17,7 +17,6 @@ export default withStyles(TextAvatar, (theme) => ({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: 'white',
 		margin: 5,
 	},
 	outerCircle: {
