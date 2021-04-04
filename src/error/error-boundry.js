@@ -1,5 +1,4 @@
 import React from 'react'
-import { Alert, DevSettings } from 'react-native'
 import crashlytics from '@react-native-firebase/crashlytics'
 
 class ErrorBoundary extends React.Component {
@@ -16,10 +15,6 @@ class ErrorBoundary extends React.Component {
 		if (this.state.hasError) {
 			error.message += `.  Caused by ${errorInfo.componentStack}`
 			crashlytics().recordError(error)
-
-			Alert.alert('Error!!', 'Something went wrong. Please close & reopen your app !!', [{ text: 'OK', onPress: () => DevSettings.reload() }], {
-				cancelable: true,
-			})
 		}
 	}
 
