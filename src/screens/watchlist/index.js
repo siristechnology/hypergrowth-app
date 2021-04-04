@@ -13,7 +13,6 @@ const TrendingComponent = () => {
 	const [refreshing, setRefreshing] = useState(false)
 	const [showSearch, setShowSearch] = useState(false)
 	const { loading, data, refetch, error } = useQuery(GET_WATCHLIST_QUERY, {
-		variables: {},
 		fetchPolicy: 'network-only',
 	})
 

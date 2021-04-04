@@ -4,12 +4,13 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { useTheme } from 'react-native-paper'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/client'
+import { useScrollToTop } from '@react-navigation/native'
+import crashlytics from '@react-native-firebase/crashlytics'
+
 import AppLayout from '../../frame/app-layout'
 import { CircularSpinner } from '../../components/common'
-
 import { ArticleListItem } from './components/article-list-item'
 import { StackNavigatorParamlist } from './types'
-import { useScrollToTop } from '@react-navigation/native'
 
 type TweetProps = React.ComponentProps<typeof ArticleListItem>
 
@@ -23,9 +24,7 @@ export default (props: Props) => {
 	const ref = React.useRef(null)
 	useScrollToTop(ref)
 
-	const { loading, data, refetch, error } = useQuery(GET_ARTICLES_QUERY, {
-		variables: {},
-	})
+	const { loading, data, refetch, error } = useQuery(GET_ARTICLES_QUERY)
 
 	const handleRefresh = () => {
 		setRefreshing(true)
@@ -33,7 +32,7 @@ export default (props: Props) => {
 	}
 
 	if (error) {
-		console.log('Error here', error)
+		crashlytics().recordError(error)
 	}
 
 	if (loading) {
