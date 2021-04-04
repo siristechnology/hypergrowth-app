@@ -1,70 +1,33 @@
-import { ApolloClient } from 'apollo-client'
-import { InMemoryCache } from 'apollo-cache-inmemory'
-import { HttpLink } from 'apollo-link-http'
-import { onError } from 'apollo-link-error'
-import { withClientState } from 'apollo-link-state'
-import { ApolloLink, Observable } from 'apollo-link'
-import fetch from 'node-fetch'
+import { ApolloClient, concat, HttpLink } from '@apollo/client'
+import { onError } from '@apollo/client/link/error'
+import { InvalidationPolicyCache } from 'apollo-invalidation-policies'
 import crashlytics from '@react-native-firebase/crashlytics'
-import { APP_SERVER } from 'react-native-dotenv'
+import { SERVER_URL } from 'react-native-dotenv'
 
-console.log('printing APP_SERVER 2', APP_SERVER)
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+	if (graphQLErrors) {
+		graphQLErrors.forEach((error) => crashlytics().recordError(new Error(error.message)))
+	}
 
-const cache = new InMemoryCache()
+	if (networkError) {
+		crashlytics().recordError(new Error(networkError.message))
+	}
+})
 
-const requestLink = new ApolloLink(
-	(operation, forward) =>
-		new Observable((observer) => {
-			let handle
-			Promise.resolve(operation)
-				.then(() => {
-					handle = forward(operation).subscribe({
-						next: observer.next.bind(observer),
-						error: observer.error.bind(observer),
-						complete: observer.complete.bind(observer),
-					})
-				})
-				.catch(observer.error.bind(observer))
-
-			return () => {
-				if (handle) handle.unsubscribe()
-			}
-		}),
-)
+const httpLink = new HttpLink({ uri: SERVER_URL })
 
 const client = new ApolloClient({
-	link: ApolloLink.from([
-		onError(({ graphQLErrors, networkError }) => {
-			if (graphQLErrors) {
-				graphQLErrors.forEach((error) => crashlytics().recordError(new Error(error.message)))
-			}
-
-			if (networkError) {
-				crashlytics().recordError(new Error(networkError.message))
-			}
-		}),
-		requestLink,
-		withClientState({
-			defaults: {
-				isConnected: true,
-			},
-			resolvers: {
-				Mutation: {
-					updateNetworkStatus: (_, { isConnected }, { cache }) => {
-						cache.writeData({ data: { isConnected } })
-						return null
-					},
-				},
-			},
-			cache,
-		}),
-		new HttpLink({
-			uri: APP_SERVER,
-			credentials: 'include',
-			fetch,
-		}),
-	]),
-	cache,
+	link: concat(errorLink, httpLink),
+	cache: new InvalidationPolicyCache({
+		invalidationPolicies: {
+			timeToLive: 60000,
+		},
+	}),
+	defaultOptions: {
+		watchQuery: {
+			fetchPolicy: 'cache-and-network',
+		},
+	},
 })
 
 export default client

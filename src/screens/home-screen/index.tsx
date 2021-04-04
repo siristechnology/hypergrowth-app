@@ -3,7 +3,7 @@ import { FlatList, View, StyleSheet, Text, RefreshControl } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { useTheme } from 'react-native-paper'
 import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import AppLayout from '../../frame/app-layout'
 import { CircularSpinner } from '../../components/common'
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { View, Image, Text, StyleSheet, ActivityIndicator, RefreshControl } from 'react-native'
 import Icon from 'react-native-vector-icons/AntDesign'
 import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { TwitterListContainer } from '../../../layout/twitter/twitter-list.container'
 
 const TrendingDetail = (props) => {

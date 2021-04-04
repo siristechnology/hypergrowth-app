@@ -1,8 +1,8 @@
 import React from 'react'
 import { AppRegistry, YellowBox } from 'react-native'
+import { ApolloProvider } from '@apollo/client'
 import App from './App.tsx'
 import { name as appName } from './app.json'
-import { ApolloProvider } from '@apollo/react-hooks'
 import GraphqlClient from './src/graphql/graphql-client'
 
 YellowBox.ignoreWarnings([

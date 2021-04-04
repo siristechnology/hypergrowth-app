@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import AppLayout from '../../frame/app-layout'
 import { CircularSpinner } from '../../components/common'
 import crashlytics from '@react-native-firebase/crashlytics'
