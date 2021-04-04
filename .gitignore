@@ -68,3 +68,6 @@ android/app/signed/*
 # vscode
 .vscode/
 **/*.prefs
+
+# env
+.env

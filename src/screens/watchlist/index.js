@@ -85,6 +85,7 @@ const style = StyleSheet.create({
 export const GET_WATCHLIST_QUERY = gql`
 	query watchlistQuery {
 		getWatchList {
+			_id
 			symbol
 			price
 			change

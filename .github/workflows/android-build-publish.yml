@@ -21,7 +21,7 @@ jobs:
 
             - name: Yarn Install, Build, (Test)
               run: |
-                  sh prepare_beta.sh
+                  sh prepare_qa.sh
                   yarn
                   yarn build
                   yarn bundle

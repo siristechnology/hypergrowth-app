@@ -5,12 +5,14 @@ import SwipeableItem from 'react-native-swipeable-item'
 import Animated from 'react-native-reanimated'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import _ from 'lodash'
+import { gql, useMutation } from '@apollo/client'
 
 const SortableList = ({ data, onRefresh, refreshing }) => {
 	const columns = ['Symbol', 'Price', 'Change']
 	const [direction, setDirection] = useState(null)
 	const [selectedColumn, setSelectedColumn] = useState(null)
 	const [listData, setListData] = useState(data)
+	const [removeStock] = useMutation(REMVOE_STOCK_MUTATION)
 
 	const itemRefs = new Map()
 
@@ -37,9 +39,14 @@ const SortableList = ({ data, onRefresh, refreshing }) => {
 		</View>
 	)
 
-	const deleteItem = (item) => {
-		//
-		console.log('printing item to be deleted', item)
+	const deleteItem = async (item) => {
+		try {
+			await removeStock({ variables: { symbol: item.symbol } })
+
+			onRefresh()
+		} catch (error) {
+			console.log('Error while deleting item: ', error)
+		}
 	}
 
 	const renderUnderlayLeft = ({ item, percentOpen }) => (
@@ -99,6 +106,15 @@ const SortableList = ({ data, onRefresh, refreshing }) => {
 		</View>
 	)
 }
+
+const REMVOE_STOCK_MUTATION = gql`
+	mutation removeStock($symbol: String!) {
+		removeStockFromWatchList(symbol: $symbol) {
+			success
+			message
+		}
+	}
+`
 
 const styles = StyleSheet.create({
 	container: {
