@@ -12,18 +12,23 @@ import StockSearch from './components/stock-search'
 const TrendingComponent = () => {
 	const [refreshing, setRefreshing] = useState(false)
 	const [showSearch, setShowSearch] = useState(false)
+	const { loading, data, refetch, error } = useQuery(GET_WATCHLIST_QUERY, {
+		variables: {},
+		fetchPolicy: 'network-only',
+	})
 
 	const handleRefresh = () => {
 		setRefreshing(true)
 		refetch().then(() => setRefreshing(false))
 	}
 
-	const { loading, data, refetch, error } = useQuery(GET_WATCHLIST_QUERY, {
-		variables: {},
-	})
-
 	if (error) {
 		crashlytics().recordError(new Error('Api error' + error.message))
+	}
+
+	const onSelectionDone = () => {
+		setShowSearch(false)
+		handleRefresh()
 	}
 
 	if (loading) {
@@ -40,7 +45,7 @@ const TrendingComponent = () => {
 				{!showSearch && <Text style={style.textStyle}>Watchlist</Text>}
 				{showSearch && (
 					<View style={style.autocompleteContainer}>
-						<StockSearch />
+						<StockSearch onSelectionDone={onSelectionDone} />
 					</View>
 				)}
 				<Icon name="magnify" size={24} color="#000" onPress={() => setShowSearch(!showSearch)} />
