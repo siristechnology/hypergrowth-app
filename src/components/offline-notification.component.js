@@ -16,7 +16,7 @@ const OfflineNotice = () => {
 	if (!isConnected) {
 		return (
 			<View style={styles.offlineContainer}>
-				<Text style={styles.offlineText}>कृपया इन्टरनेट जाँच गर्नुहोस्</Text>
+				<Text style={styles.offlineText}>Please check your Internet.</Text>
 			</View>
 		)
 	} else {

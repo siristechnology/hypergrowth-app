@@ -87,7 +87,7 @@ const SortableList = ({ data, onRefresh, refreshing }) => {
 					<TouchableNativeFeedback>
 						<View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? '#F0FBFC' : 'white' }}>
 							<Text style={{ ...styles.columnRowTxt, fontWeight: 'bold' }}>{item.symbol}</Text>
-							<Text style={styles.columnRowTxt}>{item.price.toFixed(2)}</Text>
+							<Text style={styles.columnRowTxt}>{item.price?.toFixed(2)}</Text>
 							<Text style={styles.columnRowTxt}>{item.changePercent?.toFixed(2)}</Text>
 							<Text style={styles.columnRowTxt}>{(item.marketCap / 1000).toFixed(2)}</Text>
 							<Text style={styles.columnRowTxt}>{item.peRatio?.toFixed(2)}</Text>

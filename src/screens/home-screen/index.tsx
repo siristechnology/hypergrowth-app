@@ -33,19 +33,10 @@ export default (props: Props) => {
 		crashlytics().recordError(error)
 	}
 
-	if (loading || !data) {
-		return (
-			<AppLayout>
-				<CircularSpinner />
-			</AppLayout>
-		)
-	}
-
 	const articles = (data && data.getStockNews) || []
-	const articlesData = articles.map((article) => ({ article }))
 
 	const renderItem = ({ item }) => {
-		return <ArticleListItem {...item} navigation={props.navigation} />
+		return <ArticleListItem article={item} navigation={props.navigation} />
 	}
 
 	const headerItem = () => {
@@ -58,16 +49,19 @@ export default (props: Props) => {
 
 	return (
 		<AppLayout>
-			<FlatList
-				ListHeaderComponent={headerItem}
-				contentContainerStyle={{ backgroundColor: theme.colors.background }}
-				style={{ backgroundColor: theme.colors.background }}
-				data={articlesData}
-				renderItem={renderItem}
-				keyExtractor={(item) => item.article._id}
-				ref={ref}
-				refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} colors={['#0000ff', '#689F38']} />}
-			/>
+			{!loading && articles && (
+				<FlatList
+					ListHeaderComponent={headerItem}
+					contentContainerStyle={{ backgroundColor: theme.colors.background }}
+					style={{ backgroundColor: theme.colors.background }}
+					data={articles}
+					renderItem={renderItem}
+					keyExtractor={(article) => article._id}
+					ref={ref}
+					refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} colors={['#0000ff', '#689F38']} />}
+				/>
+			)}
+			{loading && <CircularSpinner />}
 		</AppLayout>
 	)
 }
