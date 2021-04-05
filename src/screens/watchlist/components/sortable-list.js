@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, View, FlatList, TouchableNativeFeedback, RefreshControl } from 'react-native'
 import { Button, Text } from '@ui-kitten/components'
 import SwipeableItem from 'react-native-swipeable-item'
@@ -12,9 +12,12 @@ const SortableList = ({ data, onRefresh, refreshing }) => {
 	const [direction, setDirection] = useState(null)
 	const [selectedColumn, setSelectedColumn] = useState(null)
 	const [listData, setListData] = useState(data)
-	const [removeStock] = useMutation(REMVOE_STOCK_MUTATION)
-
+	const [removeStock] = useMutation(REMOVE_STOCK_MUTATION)
 	const itemRefs = new Map()
+
+	useEffect(() => {
+		setListData(data)
+	}, [data])
 
 	const sortTable = (column) => {
 		const newDirection = direction === 'desc' ? 'asc' : 'desc'
@@ -107,7 +110,7 @@ const SortableList = ({ data, onRefresh, refreshing }) => {
 	)
 }
 
-const REMVOE_STOCK_MUTATION = gql`
+const REMOVE_STOCK_MUTATION = gql`
 	mutation removeStock($symbol: String!) {
 		removeStockFromWatchList(symbol: $symbol) {
 			success

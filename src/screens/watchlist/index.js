@@ -13,16 +13,13 @@ const TrendingComponent = () => {
 	const [refreshing, setRefreshing] = useState(false)
 	const [showSearch, setShowSearch] = useState(false)
 	const { loading, data, refetch, error } = useQuery(GET_WATCHLIST_QUERY, {
-		fetchPolicy: 'network-only',
+		fetchPolicy: 'no-cache',
 	})
 
 	const handleRefresh = () => {
 		setRefreshing(true)
+		console.log('refetching')
 		refetch().then(() => setRefreshing(false))
-	}
-
-	if (error) {
-		crashlytics().recordError(new Error('Api error' + error.message))
 	}
 
 	const onSelectionDone = () => {
@@ -30,13 +27,12 @@ const TrendingComponent = () => {
 		handleRefresh()
 	}
 
-	if (loading || !data) {
-		return (
-			<AppLayout>
-				<CircularSpinner />
-			</AppLayout>
-		)
+	if (error) {
+		console.log('printing error', error)
+		crashlytics().recordError(new Error('Api error' + error.message))
 	}
+
+	console.log('printing data', data)
 
 	return (
 		<AppLayout>
@@ -49,7 +45,8 @@ const TrendingComponent = () => {
 				)}
 				<Icon name="magnify" size={24} color="#000" onPress={() => setShowSearch(!showSearch)} />
 			</View>
-			<SortableList data={data.getWatchList} onRefresh={handleRefresh} refreshing={refreshing} />
+			{loading && <CircularSpinner />}
+			{data && <SortableList data={data.getWatchList} onRefresh={handleRefresh} refreshing={refreshing} />}
 		</AppLayout>
 	)
 }

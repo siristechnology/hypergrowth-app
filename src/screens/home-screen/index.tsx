@@ -84,6 +84,7 @@ export const GET_ARTICLES_QUERY = gql`
 			publishedDate
 			relatedStockSymbols
 			relatedStocks {
+				_id
 				symbol
 			}
 		}
