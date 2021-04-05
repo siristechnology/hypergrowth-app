@@ -107,8 +107,8 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 	}
 
 	private handleLinkClick = () => {
-		const url = this.props.article.url
-		this.props.navigation.navigate('Article', { url })
+		const link = this.props.article.url
+		this.props.navigation.navigate('Article', { link })
 	}
 }
 
