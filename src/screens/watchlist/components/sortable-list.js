@@ -6,9 +6,9 @@ import Animated from 'react-native-reanimated'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import _ from 'lodash'
 import { gql, useMutation } from '@apollo/client'
+import ColumnMappings from './column-mappings'
 
 const SortableList = ({ data, onRefresh, refreshing }) => {
-	const columns = ['Symbol', 'Price', 'Change']
 	const [direction, setDirection] = useState(null)
 	const [selectedColumn, setSelectedColumn] = useState(null)
 	const [listData, setListData] = useState(data)
@@ -21,7 +21,7 @@ const SortableList = ({ data, onRefresh, refreshing }) => {
 
 	const sortTable = (column) => {
 		const newDirection = direction === 'desc' ? 'asc' : 'desc'
-		const sortedData = _.orderBy(listData, [column.toLowerCase()], [newDirection])
+		const sortedData = _.orderBy(listData, [column], [newDirection])
 		setSelectedColumn(column)
 		setDirection(newDirection)
 		setListData(sortedData)
@@ -29,11 +29,11 @@ const SortableList = ({ data, onRefresh, refreshing }) => {
 
 	const tableHeader = () => (
 		<View style={styles.tableHeader}>
-			{columns.map((column, index) => (
-				<TouchableNativeFeedback key={index} style={styles.columnHeader} onPress={() => sortTable(column)}>
+			{Object.entries(ColumnMappings).map((col) => (
+				<TouchableNativeFeedback key={col[0]} style={styles.columnHeader} onPress={() => sortTable(col[0])}>
 					<Text style={styles.columnHeaderTxt}>
-						{column + ' '}
-						{selectedColumn === column && (
+						{col[1] + ' '}
+						{selectedColumn === col[0] && (
 							<MaterialCommunityIcons name={direction === 'desc' ? 'arrow-down-drop-circle' : 'arrow-up-drop-circle'} />
 						)}
 					</Text>
@@ -87,8 +87,10 @@ const SortableList = ({ data, onRefresh, refreshing }) => {
 					<TouchableNativeFeedback>
 						<View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? '#F0FBFC' : 'white' }}>
 							<Text style={{ ...styles.columnRowTxt, fontWeight: 'bold' }}>{item.symbol}</Text>
-							<Text style={styles.columnRowTxt}>{item.price}</Text>
-							<Text style={styles.columnRowTxt}>{item.change}</Text>
+							<Text style={styles.columnRowTxt}>{item.price.toFixed(2)}</Text>
+							<Text style={styles.columnRowTxt}>{item.changePercent?.toFixed(2)}</Text>
+							<Text style={styles.columnRowTxt}>{(item.marketCap / 1000).toFixed(2)}</Text>
+							<Text style={styles.columnRowTxt}>{item.peRatio?.toFixed(2)}</Text>
 						</View>
 					</TouchableNativeFeedback>
 				</View>

@@ -32,8 +32,6 @@ const TrendingComponent = () => {
 		crashlytics().recordError(new Error('Api error' + error.message))
 	}
 
-	console.log('printing data', data)
-
 	return (
 		<AppLayout>
 			<View style={style.headerStyle}>
@@ -85,7 +83,12 @@ export const GET_WATCHLIST_QUERY = gql`
 			_id
 			symbol
 			price
-			change
+			changePercent
+			marketCap
+			peRatio
+			week52High
+			week52Low
+			ytdChangePercent
 		}
 	}
 `
