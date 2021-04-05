@@ -30,7 +30,7 @@ const TrendingComponent = () => {
 		handleRefresh()
 	}
 
-	if (loading) {
+	if (loading || !data) {
 		return (
 			<AppLayout>
 				<CircularSpinner />

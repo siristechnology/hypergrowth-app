@@ -12,8 +12,6 @@ import { CircularSpinner } from '../../components/common'
 import { ArticleListItem } from './components/article-list-item'
 import { StackNavigatorParamlist } from './types'
 
-type TweetProps = React.ComponentProps<typeof ArticleListItem>
-
 type Props = {
 	navigation?: StackNavigationProp<StackNavigatorParamlist>
 }
@@ -35,7 +33,7 @@ export default (props: Props) => {
 		crashlytics().recordError(error)
 	}
 
-	if (loading) {
+	if (loading || !data) {
 		return (
 			<AppLayout>
 				<CircularSpinner />
@@ -46,7 +44,7 @@ export default (props: Props) => {
 	const articles = (data && data.getStockNews) || []
 	const articlesData = articles.map((article) => ({ article }))
 
-	const renderItem = ({ item }: { item: TweetProps }) => {
+	const renderItem = ({ item }) => {
 		return <ArticleListItem {...item} navigation={props.navigation} />
 	}
 
@@ -66,7 +64,7 @@ export default (props: Props) => {
 				style={{ backgroundColor: theme.colors.background }}
 				data={articlesData}
 				renderItem={renderItem}
-				keyExtractor={(item) => item.article._id.toString()}
+				keyExtractor={(item) => item.article._id}
 				ref={ref}
 				refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} colors={['#0000ff', '#689F38']} />}
 			/>
