@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { FlatList, View, StyleSheet, Text, RefreshControl } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack'
-import { useTheme } from 'react-native-paper'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/client'
 import { useScrollToTop } from '@react-navigation/native'
@@ -17,17 +16,10 @@ type Props = {
 }
 
 export default (props: Props) => {
-	const theme = useTheme()
-	const [refreshing, setRefreshing] = useState(false)
 	const ref = React.useRef(null)
 	useScrollToTop(ref)
 
 	const { loading, data, refetch, error } = useQuery(GET_ARTICLES_QUERY)
-
-	const handleRefresh = () => {
-		setRefreshing(true)
-		refetch().then(() => setRefreshing(false))
-	}
 
 	if (error) {
 		crashlytics().recordError(error)
@@ -56,7 +48,7 @@ export default (props: Props) => {
 					renderItem={renderItem}
 					keyExtractor={(article) => article._id}
 					ref={ref}
-					refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} colors={['#0000ff', '#689F38']} />}
+					refreshControl={<RefreshControl refreshing={articles.length == 0} onRefresh={refetch} colors={['#0000ff', '#689F38']} />}
 				/>
 			)}
 			{loading && articles.length == 0 && <CircularSpinner />}

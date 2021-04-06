@@ -20,11 +20,11 @@ const client = new ApolloClient({
 	link: concat(errorLink, httpLink),
 	cache: new InvalidationPolicyCache({
 		invalidationPolicies: {
-			timeToLive: 60000,
+			timeToLive: 86400000,
 		},
 	}),
 	defaultOptions: {
-		watchQuery: {
+		query: {
 			fetchPolicy: 'cache-and-network',
 		},
 	},
