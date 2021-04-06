@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { ScrollView, StyleSheet, View, FlatList, TouchableNativeFeedback, RefreshControl } from 'react-native'
-import { Button, Text } from '@ui-kitten/components'
-import SwipeableItem from 'react-native-swipeable-item'
-import Animated from 'react-native-reanimated'
+import { Text } from '@ui-kitten/components'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import _ from 'lodash'
 import { gql, useMutation } from '@apollo/client'
@@ -13,7 +11,6 @@ const SortableList = ({ data, onRefresh, refreshing }) => {
 	const [selectedColumn, setSelectedColumn] = useState(null)
 	const [listData, setListData] = useState(data)
 	const [removeStock] = useMutation(REMOVE_STOCK_MUTATION)
-	const itemRefs = new Map()
 
 	useEffect(() => {
 		setListData(data)
@@ -39,6 +36,7 @@ const SortableList = ({ data, onRefresh, refreshing }) => {
 					</Text>
 				</TouchableNativeFeedback>
 			))}
+			<View style={[styles.columnHeader, styles.columnHeaderTxt]} />
 		</View>
 	)
 
@@ -52,52 +50,23 @@ const SortableList = ({ data, onRefresh, refreshing }) => {
 		}
 	}
 
-	const renderUnderlayRight = ({ item, percentOpen }) => (
-		<Animated.View
-			style={[styles.row, styles.underlayRight, { opacity: percentOpen }]} // Fade in on open
-		>
-			<Button onPress={() => deleteItem(item)} status="danger">
-				Remove
-			</Button>
-		</Animated.View>
-	)
-
 	const renderItem = ({ item, index }) => {
 		return (
-			<SwipeableItem
-				key={item.symbol}
-				item={item}
-				ref={(ref) => {
-					if (ref && !itemRefs.get(item.symbol)) {
-						itemRefs.set(item.symbol, ref)
-					}
-				}}
-				onChange={({ open }) => {
-					if (open) {
-						itemRefs.forEach((ref, key) => {
-							if (key !== item.symbol && ref) ref.close()
-						})
-					}
-				}}
-				overSwipe={20}
-				renderUnderlayRight={renderUnderlayRight}
-				snapPointsRight={[120]}
-			>
-				<View style={[styles.row, { backgroundColor: item.backgroundColor, height: item.height }]}>
-					<TouchableNativeFeedback>
-						<View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? '#F0FBFC' : 'white' }}>
-							<Text style={{ ...styles.columnRowTxt, fontWeight: 'bold' }}>{item.symbol}</Text>
-							<Text style={styles.columnRowTxt}>{item.price?.toFixed(2)}</Text>
-							<Text style={styles.columnRowTxt}>{item.changePercent?.toFixed(2)}</Text>
-							<Text style={styles.columnRowTxt}>{(item.marketCap / 1000).toFixed(2)}</Text>
-							<Text style={styles.columnRowTxt}>{item.peRatio?.toFixed(2)}</Text>
-							<Text style={styles.columnRowTxt}>{item.week52High?.toFixed(2)}</Text>
-							<Text style={styles.columnRowTxt}>{item.week52Low?.toFixed(2)}</Text>
-							<Text style={styles.columnRowTxt}>{item.ytdChangePercent?.toFixed(2)}</Text>
-						</View>
+			<View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? '#F0FBFC' : 'white', height: 50 }}>
+				<Text style={{ ...styles.columnRowContent, fontWeight: 'bold' }}>{item.symbol}</Text>
+				<Text style={styles.columnRowContent}>{item.price?.toFixed(2)}</Text>
+				<Text style={styles.columnRowContent}>{item.changePercent?.toFixed(2)}</Text>
+				<Text style={styles.columnRowContent}>{(item.marketCap / 1000).toFixed(2)}</Text>
+				<Text style={styles.columnRowContent}>{item.peRatio?.toFixed(2)}</Text>
+				<Text style={styles.columnRowContent}>{item.week52High?.toFixed(2)}</Text>
+				<Text style={styles.columnRowContent}>{item.week52Low?.toFixed(2)}</Text>
+				<Text style={styles.columnRowContent}>{item.ytdChangePercent?.toFixed(2)}</Text>
+				<View style={styles.columnRowContent}>
+					<TouchableNativeFeedback onPress={() => deleteItem(item)}>
+						<MaterialCommunityIcons name="trash-can-outline" size={20} color="gray" />
 					</TouchableNativeFeedback>
 				</View>
-			</SwipeableItem>
+			</View>
 		)
 	}
 
@@ -120,6 +89,8 @@ const SortableList = ({ data, onRefresh, refreshing }) => {
 		</ScrollView>
 	)
 }
+
+const DeleteIcon = (props) => <MaterialCommunityIcons name="trash-can-outline" size={20} color="white" />
 
 const REMOVE_STOCK_MUTATION = gql`
 	mutation removeStock($symbol: String!) {
@@ -152,7 +123,6 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-evenly',
 	},
 	columnHeader: {
-		width: '20%',
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
@@ -162,9 +132,11 @@ const styles = StyleSheet.create({
 		width: 80,
 		textAlign: 'center',
 	},
-	columnRowTxt: {
+	columnRowContent: {
 		width: 80,
 		textAlign: 'center',
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 	row: {
 		flexDirection: 'row',
