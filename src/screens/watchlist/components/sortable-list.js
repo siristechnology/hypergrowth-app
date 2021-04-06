@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, View, FlatList, TouchableNativeFeedback, RefreshControl } from 'react-native'
+import { ScrollView, StyleSheet, View, FlatList, TouchableNativeFeedback, RefreshControl } from 'react-native'
 import { Button, Text } from '@ui-kitten/components'
 import SwipeableItem from 'react-native-swipeable-item'
 import Animated from 'react-native-reanimated'
@@ -99,16 +99,22 @@ const SortableList = ({ data, onRefresh, refreshing }) => {
 	}
 
 	return (
-		<View style={styles.container}>
+		<ScrollView
+			style={styles.container}
+			horizontal={true}
+			decelerationRate={0}
+			snapToInterval={200}
+			snapToAlignment={'center'}
+			refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={['#0000ff', '#689F38']} />}
+		>
 			<FlatList
 				data={listData}
 				keyExtractor={(item) => item.symbol}
 				ListHeaderComponent={tableHeader}
 				stickyHeaderIndices={[0]}
 				renderItem={renderItem}
-				refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={['#0000ff', '#689F38']} />}
 			/>
-		</View>
+		</ScrollView>
 	)
 }
 
@@ -123,10 +129,9 @@ const REMOVE_STOCK_MUTATION = gql`
 
 const styles = StyleSheet.create({
 	container: {
+		flexDirection: 'row',
 		backgroundColor: '#fff',
-		alignItems: 'center',
-		justifyContent: 'center',
-		width: '100%',
+		height: '100%',
 	},
 	tableHeader: {
 		flexDirection: 'row',
@@ -153,7 +158,7 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 	},
 	columnRowTxt: {
-		width: '20%',
+		width: 80,
 		textAlign: 'center',
 	},
 	row: {
