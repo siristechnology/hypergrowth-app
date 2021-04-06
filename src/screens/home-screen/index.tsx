@@ -49,11 +49,9 @@ export default (props: Props) => {
 
 	return (
 		<AppLayout>
-			{!loading && articles && (
+			{articles.length > 0 && (
 				<FlatList
 					ListHeaderComponent={headerItem}
-					contentContainerStyle={{ backgroundColor: theme.colors.background }}
-					style={{ backgroundColor: theme.colors.background }}
 					data={articles}
 					renderItem={renderItem}
 					keyExtractor={(article) => article._id}
@@ -61,7 +59,7 @@ export default (props: Props) => {
 					refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} colors={['#0000ff', '#689F38']} />}
 				/>
 			)}
-			{loading && <CircularSpinner />}
+			{loading && articles.length == 0 && <CircularSpinner />}
 		</AppLayout>
 	)
 }
