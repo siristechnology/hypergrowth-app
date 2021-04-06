@@ -40,7 +40,7 @@ const ArticleListItemCompoent = (props) => {
 						<View style={eva.style.bottomLabelContainer}>
 							<MaterialCommunityIcons name="equalizer-outline" size={12} color={'gray'} />
 							<Text style={eva.style.bottomLabel} appearance="hint" category="p2">
-								{article.relatedStocks[0].changePercent || 0}%
+								{article.relatedStocks[0].changePercent?.toFixed(2) || 0}%
 							</Text>
 						</View>
 					</ArticleActivityBar>

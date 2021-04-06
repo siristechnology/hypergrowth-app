@@ -91,6 +91,9 @@ const SortableList = ({ data, onRefresh, refreshing }) => {
 							<Text style={styles.columnRowTxt}>{item.changePercent?.toFixed(2)}</Text>
 							<Text style={styles.columnRowTxt}>{(item.marketCap / 1000).toFixed(2)}</Text>
 							<Text style={styles.columnRowTxt}>{item.peRatio?.toFixed(2)}</Text>
+							<Text style={styles.columnRowTxt}>{item.week52High?.toFixed(2)}</Text>
+							<Text style={styles.columnRowTxt}>{item.week52Low?.toFixed(2)}</Text>
+							<Text style={styles.columnRowTxt}>{item.ytdChangePercent?.toFixed(2)}</Text>
 						</View>
 					</TouchableNativeFeedback>
 				</View>
@@ -156,6 +159,8 @@ const styles = StyleSheet.create({
 	columnHeaderTxt: {
 		color: 'white',
 		fontWeight: 'bold',
+		width: 80,
+		textAlign: 'center',
 	},
 	columnRowTxt: {
 		width: 80,
