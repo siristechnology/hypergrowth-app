@@ -34,13 +34,13 @@ const ArticleListItemCompoent = (props) => {
 						<View style={eva.style.bottomLabelContainer}>
 							{ClockIconOutline(eva.style.dateIcon)}
 							<Text style={eva.style.bottomLabel} appearance="hint" category="p2">
-								{getRelativeTime(article.createdDate)}
+								{getRelativeTime(article.publishedDate)}
 							</Text>
 						</View>
 						<View style={eva.style.bottomLabelContainer}>
 							<MaterialCommunityIcons name="equalizer-outline" size={12} color={'gray'} />
 							<Text style={eva.style.bottomLabel} appearance="hint" category="p2">
-								{article.relatedStocks[0].change || 0}%
+								{article.relatedStocks[0].changePercent || 0}%
 							</Text>
 						</View>
 					</ArticleActivityBar>

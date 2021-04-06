@@ -1,6 +1,5 @@
 import React from 'react'
 import { FlatList, View, StyleSheet, Text, RefreshControl } from 'react-native'
-import { StackNavigationProp } from '@react-navigation/stack'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/client'
 import { useScrollToTop } from '@react-navigation/native'
@@ -9,13 +8,8 @@ import crashlytics from '@react-native-firebase/crashlytics'
 import AppLayout from '../../frame/app-layout'
 import { CircularSpinner } from '../../components/common'
 import { ArticleListItem } from './components/article-list-item'
-import { StackNavigatorParamlist } from './types'
 
-type Props = {
-	navigation?: StackNavigationProp<StackNavigatorParamlist>
-}
-
-export default (props: Props) => {
+export default (props) => {
 	const ref = React.useRef(null)
 	useScrollToTop(ref)
 
@@ -70,6 +64,7 @@ export const GET_ARTICLES_QUERY = gql`
 			relatedStocks {
 				_id
 				symbol
+				changePercent
 			}
 		}
 	}
