@@ -52,9 +52,9 @@ const SortableList = ({ data, onRefresh, refreshing }) => {
 		}
 	}
 
-	const renderUnderlayLeft = ({ item, percentOpen }) => (
+	const renderUnderlayRight = ({ item, percentOpen }) => (
 		<Animated.View
-			style={[styles.row, styles.underlayLeft, { opacity: percentOpen }]} // Fade in on open
+			style={[styles.row, styles.underlayRight, { opacity: percentOpen }]} // Fade in on open
 		>
 			<Button onPress={() => deleteItem(item)} status="danger">
 				Remove
@@ -80,8 +80,8 @@ const SortableList = ({ data, onRefresh, refreshing }) => {
 					}
 				}}
 				overSwipe={20}
-				renderUnderlayLeft={renderUnderlayLeft}
-				snapPointsLeft={[150]}
+				renderUnderlayRight={renderUnderlayRight}
+				snapPointsRight={[120]}
 			>
 				<View style={[styles.row, { backgroundColor: item.backgroundColor, height: item.height }]}>
 					<TouchableNativeFeedback>
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
 	},
 	underlayRight: {
 		flex: 1,
-		backgroundColor: 'teal',
+		backgroundColor: '#ffebcd',
 		justifyContent: 'flex-start',
 	},
 	underlayLeft: {
