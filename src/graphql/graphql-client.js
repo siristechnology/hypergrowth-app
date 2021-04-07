@@ -23,11 +23,6 @@ const client = new ApolloClient({
 			timeToLive: 86400000,
 		},
 	}),
-	defaultOptions: {
-		query: {
-			fetchPolicy: 'cache-and-network',
-		},
-	},
 })
 
 export default client
