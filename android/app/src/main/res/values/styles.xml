@@ -14,10 +14,4 @@
         <item name="android:windowBackground">@color/app_bg</item>
     </style>
 
-    <!-- Adds the splash screen definition -->
-    <style name="BootTheme" parent="AppTheme">
-        <!-- set the generated bootsplash.xml drawable as activity background -->
-        <item name="android:background">@drawable/bootsplash</item>
-    </style>
-
 </resources>

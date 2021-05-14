@@ -7,11 +7,9 @@ import crashlytics from '@react-native-firebase/crashlytics'
 
 import { Main } from './src/main'
 import ErrorBoundary from './src/error/error-boundry'
-import RNBootSplash from 'react-native-bootsplash'
 
 export default function App() {
 	useEffect(() => {
-		RNBootSplash.hide()
 		signInAnonymously()
 	}, [])
 
